@@ -6,7 +6,6 @@ if (!isset($_SESSION['join'])) {
 	header('Location: register.php');
 	exit();
 }
-
 $hash = password_hash($_SESSION['join']['password'], PASSWORD_BCRYPT);
 
 if(!empty($_POST)){

@@ -38,6 +38,9 @@ if(!empty($_REQUEST['myPage_id'])){
 <img src="user_img/<?php echo(htmlspecialchars($konoPageNoUser['user_img'], ENT_QUOTES)); ?>" class="rounded-circle" alt="プロフィール画像">
 <p>ユーザーねいむぅ</p>
 <p><?php echo(htmlspecialchars($konoPageNoUser['name'], ENT_QUOTES));?></p>
+<?php if($_SESSION['id'] == $_REQUEST['myPage_id']): ?>
+<a href="update.php?update_id=<?php echo $_SESSION['id']; ?>">ユーザー情報を変更する</a>
+<?php endif; ?>
 <p>フォロー</p>
 <p>フォロワー</p>
 <?php if($_REQUEST['myPage_id'] != $_SESSION['id'] && empty($follow_check)): ?>
@@ -54,7 +57,7 @@ if(!empty($_REQUEST['myPage_id'])){
   	<img src="user_img/<?php echo(htmlspecialchars($myPage['user_img'], ENT_QUOTES)); ?>" class="rounded-circle" alt="プロフィール画像">
     <h5 class="card-title"><a href="myPage.php?myPage_id=<?php echo(htmlspecialchars($myPage['user_id'], ENT_QUOTES));?>"><?php echo(htmlspecialchars($myPage['name'], ENT_QUOTES));?></a></h5>
 	</div>
-    <p class="card-text"><a href="show.php?id=<?php print(htmlspecialchars($myPage['id'], ENT_QUOTES)); ?>"><?php echo(htmlspecialchars($myPage['message'], ENT_QUOTES));?></a></p>
+    <p class="card-text"><a href="show.php?id=<?php print(htmlspecialchars($myPage['id'], ENT_QUOTES)); ?>"><?php echo nl2br(htmlspecialchars($myPage['message'], ENT_QUOTES));?></a></p>
   </div>
 <?php if(isset($myPage['picture'])): ?>
 <img src="picture/<?php echo(htmlspecialchars($myPage['picture'], ENT_QUOTES));?>" class="img-fluid" alt="投稿画像">

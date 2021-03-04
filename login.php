@@ -40,9 +40,9 @@ if (!empty($_POST)) {
 ?>
 <?php require('header.php'); ?>
 <div class="wrapper">
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-lg-5 offset-lg-3">
 			<div class="box box1">
 				<div class="input-group input-group1">
 					<span class="input-group-addon addon-facebook addon-facebook1">
@@ -94,5 +94,4 @@ if (!empty($_POST)) {
 	</div>
 </div>
 </div>
-</body>
-</html>
+<?php require('footer.php'); ?>

@@ -78,7 +78,7 @@ $page = $_REQUEST['page'];
   	<img src="user_img/<?php echo(htmlspecialchars($post['user_img'], ENT_QUOTES)); ?>" class="rounded-circle" alt="プロフィール画像">
     <h5 class="card-title"><a href="myPage.php?myPage_id=<?php echo(htmlspecialchars($post['user_id'], ENT_QUOTES));?>"><?php echo(htmlspecialchars($post['name'], ENT_QUOTES));?></a></h5>
 	</div>
-    <p class="card-text"><a href="show.php?id=<?php print(htmlspecialchars($post['id'], ENT_QUOTES)); ?>"><?php echo(htmlspecialchars($post['message'], ENT_QUOTES));?></a></p>
+    <p class="card-text"><a href="show.php?id=<?php echo nl2br(htmlspecialchars($post['id'], ENT_QUOTES)); ?>"><?php echo(htmlspecialchars($post['message'], ENT_QUOTES));?></a></p>
   </div>
 <?php if(isset($post['picture'])): ?>
 <img src="picture/<?php echo(htmlspecialchars($post['picture'], ENT_QUOTES));?>" class="img-fluid" alt="投稿画像">

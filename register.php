@@ -18,7 +18,7 @@ if(!empty($_POST)) {
 	$fileName = $_FILES['image']['name'];
 	if 	(!empty($fileName)) {
 		$ext = substr($fileName, -3);
-		if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png') {
+		if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png' && $ext != 'jpeg') {
 			$error['image'] = 'type';
 		}
 	}
@@ -32,15 +32,19 @@ if(!empty($_POST)) {
 			$error['email'] = 'duplicate';
 		}
 	}
-	
 	if(empty($error)) {
-		if($_FILES['image']['name'] !== ""){
+		$_SESSION['join'] = $_POST;
+		
+		if($_FILES['image']['name'] !==""){
 			$image = date('YmdHis') . $_FILES['image']['name'];
 					move_uploaded_file($_FILES['image']['tmp_name'],
 					'user_img/'. $image);
+			$_SESSION['join']['image'] = $image;
+			}else{
+			$image = 'DefaultIcon.jpeg';
+			$_SESSION['join']['image'] = $image;
 			}
-		$_SESSION['join'] = $_POST;
-		$_SESSION['join']['image'] = $image;
+
 		header('Location: check.php');
 		exit();
 	}
