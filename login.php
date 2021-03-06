@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 
 if (!empty($_POST)) {
 	if ($_POST['email'] === ''){

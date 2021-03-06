@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 
 $url = 'update.php?update_id='.$_SESSION['id'];
 $pageId = $_REQUEST['update_id'];

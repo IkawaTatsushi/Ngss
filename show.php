@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 
 if(isset($_REQUEST['id'])) {
     $posts = $db->prepare('SELECT u.name, u.user_img, p.* FROM users 

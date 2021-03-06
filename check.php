@@ -1,10 +1,10 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 
 if (!isset($_SESSION['join'])) {
-	header('Location: register.php');
+	header('Location: sign_up.php');
 	exit();
 }
 $hash = password_hash($_SESSION['join']['password'], PASSWORD_BCRYPT);
@@ -56,7 +56,7 @@ if(!empty($_POST)){
 		</tr>
 	</tbody>
 	</table>
-	<a href="register.php?action=rewrite">書き直す</a>
+	<a href="sign_up.php?action=rewrite">書き直す</a>
 	<input type="submit" class="btn-block btn btn-lg btn-primary btn-primary1" value="登録する">
 	</form>
 	</div><!-- /container -->

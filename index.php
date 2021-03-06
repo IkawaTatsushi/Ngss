@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 
 if(isset($_SESSION['id']) && $_SESSION['time'] + 60*60*24*365 > time()) {
 	$_SESSION['time'] = time();

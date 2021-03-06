@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 ?>
 <?php require('header.php'); ?>
 <div class="container">

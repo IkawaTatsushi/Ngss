@@ -20,7 +20,7 @@
         <a class="nav-link" href="top.php">Gspとは <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="register.php">新規登録</a>
+        <a class="nav-link" href="sign_up.php">新規登録</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="index.php">投稿一覧</a>
@@ -38,8 +38,8 @@
         <?php endif; ?>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="キーワード検索" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
+      <input class="form-control mr-sm-2" type="search" placeholder="キーワード検索" aria-label="Search" name="search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
   </div>

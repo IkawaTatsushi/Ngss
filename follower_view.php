@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 
 $_SESSION['myPage_id'] = $_REQUEST['id'];
 
@@ -31,6 +31,7 @@ while($follow_check = $follow_checks->fetch()){
 in_array($follower['id'], $check) ? print '<a href="follow_delete.php?id='.$follower['id'].'"class="btn btn-primary">フォローをはずす</a><br>'
 :print '<a href="follow.php?id='.$follower['id'].'"class="btn btn-primary">フォローする</a><br>';}?>
 <?php endforeach; ?>
+<br>
 <a href="myPage.php?myPage_id=<?php echo $_SESSION['myPage_id'];?>">戻る</a>
 </div>
 </div>

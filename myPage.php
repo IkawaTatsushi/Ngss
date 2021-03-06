@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_regenerate_id(true);
-require('dbconnect.php');
+require('function.php');
 
 $follow_checks = $db->prepare('SELECT * FROM follow WHERE user_id=? AND follow=?');
 $follow_checks->execute(array(
@@ -42,7 +42,7 @@ if(!empty($_REQUEST['myPage_id'])){
 <p>ユーザーねいむぅ</p>
 <p><?php echo(htmlspecialchars($konoPageNoUser['name'], ENT_QUOTES));?></p>
 <?php if($_SESSION['id'] == $_REQUEST['myPage_id']): ?>
-<a href="update.php?update_id=<?php echo $_SESSION['id']; ?>">ユーザー情報を変更する</a>
+<a href="update.php?update_id=<?php echo $_SESSION['id']; ?>">ユーザー情報を変更する</a><br>
 <?php endif; ?>
 <a href="follow_view.php?id=<?php echo $konoPageNoUser['id']; ?>">フォロー</a>
 <a href="follower_view.php?id=<?php echo $konoPageNoUser['id']; ?>">フォロワー</a><br>
