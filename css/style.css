@@ -10,7 +10,7 @@
     margin: 0 auto;
   }
   .wrapper{
-    padding-top: 5%;
+    padding-top: 10%;
   }
   .slideshow > li {
     list-style-type: none;
@@ -197,6 +197,11 @@ strong {
 }
 .rounded-circle{
   width: 75px;
+  height: auto;
+  object-fit: cover;
+}
+#preview{
+  width: 200px;
   height: auto;
   object-fit: cover;
 }

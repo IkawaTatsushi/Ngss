@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>GSP</title>
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark fixed-top">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -21,6 +21,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="register.php">新規登録</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.php">投稿一覧</a>
       </li>
       <?php if(!empty($_SESSION['id'])): ?>
         <li class="nav-item">
@@ -37,7 +40,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="キーワード検索" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
   </div>
 </nav>

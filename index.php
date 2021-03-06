@@ -1,8 +1,9 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
-if(isset($_SESSION['id']) && $_SESSION['time'] + 36000 > time()) {
+if(isset($_SESSION['id']) && $_SESSION['time'] + 60*60*24*365 > time()) {
 	$_SESSION['time'] = time();
 
 	$users = $db->prepare('SELECT * FROM users WHERE id=?');
@@ -72,23 +73,21 @@ $page = $_REQUEST['page'];
 
 	<h1>投稿一覧</h1>
 <?php foreach ($posts as $post): ?>
-<div class="card mb-5">
+<div class="card mb-5 pb-3">
   <div class="card-body">
 	  <div class="d-flex">
   	<img src="user_img/<?php echo(htmlspecialchars($post['user_img'], ENT_QUOTES)); ?>" class="rounded-circle" alt="プロフィール画像">
-    <h5 class="card-title"><a href="myPage.php?myPage_id=<?php echo(htmlspecialchars($post['user_id'], ENT_QUOTES));?>"><?php echo(htmlspecialchars($post['name'], ENT_QUOTES));?></a></h5>
+    <h5 class="card-title mt-3"><a href="myPage.php?myPage_id=<?php echo(htmlspecialchars($post['user_id'], ENT_QUOTES));?>" class="mr-5"><?php echo(htmlspecialchars($post['name'], ENT_QUOTES));?><small class="text-muted ml-5"><?php echo(htmlspecialchars($post['created'], ENT_QUOTES));?></small></a></h5>
 	</div>
-    <p class="card-text"><a href="show.php?id=<?php echo nl2br(htmlspecialchars($post['id'], ENT_QUOTES)); ?>"><?php echo(htmlspecialchars($post['message'], ENT_QUOTES));?></a></p>
+    <p class="card-text ml-5"><a href="show.php?id=<?php echo (htmlspecialchars($post['id'], ENT_QUOTES)); ?>"><?php echo nl2br(htmlspecialchars($post['message'], ENT_QUOTES));?></a></p>
   </div>
 <?php if(isset($post['picture'])): ?>
 <img src="picture/<?php echo(htmlspecialchars($post['picture'], ENT_QUOTES));?>" class="img-fluid" alt="投稿画像">
 <?php endif; ?>
-<div class="row">
-<a href="" class="btn btn-dark col-1 offset-10 mt-3">削除</a>
-</div>
-<small class="text-muted"><?php echo(htmlspecialchars($post['created'], ENT_QUOTES));?></small>
 <?php if($post['user_id'] == $user['id']): ?>
-<a href="delete.php?id=<?php echo(htmlspecialchars($post['id'])); ?>">削除</a>
+<div class="row">
+<a href="delete.php?id=<?php echo(htmlspecialchars($post['id'])); ?>" class="btn btn-dark col-1 offset-10 mt-3">削除</a>
+</div>
 <?php endif;?>
 </div>
 <?php endforeach; ?>

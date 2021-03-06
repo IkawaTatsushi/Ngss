@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
 if(!empty($_POST)) {
@@ -14,7 +15,7 @@ if(!empty($_POST)) {
 	}
 	if ($_POST['password'] === ''){
 		$error['password'] = 'blank';
-	}		
+	}
 	$fileName = $_FILES['image']['name'];
 	if 	(!empty($fileName)) {
 		$ext = substr($fileName, -3);
@@ -35,15 +36,14 @@ if(!empty($_POST)) {
 	if(empty($error)) {
 		$_SESSION['join'] = $_POST;
 		
-		if($_FILES['image']['name'] !==""){
+		if(!empty($_FILES['image']['name'])){
 			$image = date('YmdHis') . $_FILES['image']['name'];
 					move_uploaded_file($_FILES['image']['tmp_name'],
-					'user_img/'. $image);
+					'user_img/' . $image);
 			$_SESSION['join']['image'] = $image;
-			}else{
-			$image = 'DefaultIcon.jpeg';
-			$_SESSION['join']['image'] = $image;
-			}
+		}else{
+			$_SESSION['join']['image'] = 'DefaultIcon.jpeg';
+		}
 
 		header('Location: check.php');
 		exit();
@@ -52,8 +52,8 @@ if(!empty($_POST)) {
 
 if ($_REQUEST['action'] =='rewrite' && isset($_SESSION
 ['join'])) {
-	unlink('user_img/'.$_SESSION['join']['image']);
 	$_POST = $_SESSION['join'];
+	$_SESSION['join']['image'] != 'DefaultIcon.jpeg' ? unlink('user_img/'.$_SESSION['join']['image']) : $a=1 ;
 }
 ?>
 <?php require('header.php'); ?>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
 $follow_checks = $db->prepare('SELECT * FROM follow WHERE user_id=? AND follow=?');
@@ -25,6 +26,7 @@ if(!empty($_REQUEST['myPage_id'])){
 <div class="container">
 <div class="wrapper"></div>
 
+<?php if($_SESSION['id'] === $_REQUEST['myPage_id']): ?>
 <form action="" method="post" enctype="multipart/form-data">
     <label for="message">メッセージを投稿する</label>
     <textarea id="message" name="message" rows="8" cols="40" class="form-control"></textarea>
@@ -33,6 +35,7 @@ if(!empty($_REQUEST['myPage_id'])){
 	<img id="preview">
 	<input type="submit" value="送信">
 </form>
+<?php endif; ?>
 
 <h1>ユーザじょほおおお</h1>
 <img src="user_img/<?php echo(htmlspecialchars($konoPageNoUser['user_img'], ENT_QUOTES)); ?>" class="rounded-circle" alt="プロフィール画像">
@@ -41,13 +44,13 @@ if(!empty($_REQUEST['myPage_id'])){
 <?php if($_SESSION['id'] == $_REQUEST['myPage_id']): ?>
 <a href="update.php?update_id=<?php echo $_SESSION['id']; ?>">ユーザー情報を変更する</a>
 <?php endif; ?>
-<p>フォロー</p>
-<p>フォロワー</p>
+<a href="follow_view.php?id=<?php echo $konoPageNoUser['id']; ?>">フォロー</a>
+<a href="follower_view.php?id=<?php echo $konoPageNoUser['id']; ?>">フォロワー</a><br>
 <?php if($_REQUEST['myPage_id'] != $_SESSION['id'] && empty($follow_check)): ?>
-<a href="follow.php?id=<?php echo(htmlspecialchars($konoPageNoUser['id'], ENT_QUOTES));?>">フォローするぅぅぅ</a><br>
+<a href="follow.php?id=<?php echo $konoPageNoUser['id'];?>">フォローするぅぅぅ</a><br>
 <?php endif; ?>
 <?php if($_REQUEST['myPage_id'] != $_SESSION['id'] && !empty($follow_check)): ?>
-<a href="follow_delete.php?id=<?php echo(htmlspecialchars($konoPageNoUser['id'], ENT_QUOTES));?>">フォローはずすううう</a>
+<a href="follow_delete.php?id=<?php echo $konoPageNoUser['id'];?>">フォローはずすううう</a>
 <?php endif; ?>
 <h1>投稿一覧</h1>
 <?php foreach ($myPages as $myPage): ?>

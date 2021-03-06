@@ -1,29 +1,17 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
-if(isset($_REQUEST['id'])){
+if(isset($_REQUEST['id']) && $_SESSION['id']){
     $follow = $db->prepare('DELETE FROM follow WHERE follow=?');
     $follow->execute(array(
         $_REQUEST['id'],
     ));
+    header('Location:'.$_SERVER['HTTP_REFERER']);
+    exit();
+}else{
+    header('Location: error.php');
+    exit();
 }
-
 ?>
-<?php require('header.php'); ?>
-<div class="container">
-<div class="wrapper"></div>
-
-<form action="" method="post" enctype="multipart/form-data">
-    <label for="message">メッセージを投稿する</label>
-    <textarea id="message" name="message" rows="8" cols="40" class="form-control"></textarea>
-    <label for="inputFile" class="mt-5">画像選択</label>
-    <input type="file" name="image" class="form-control-file" id="image">
-	<img id="preview">
-	<input type="submit" value="送信">
-</form>
-
-<h1>フォローをはずしましたあああああ</h1>
-
-</div>
-<?php require('footer.php'); ?>

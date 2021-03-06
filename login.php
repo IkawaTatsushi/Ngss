@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
 if (!empty($_POST)) {
@@ -29,7 +30,7 @@ if (!empty($_POST)) {
 			$_SESSION['time'] = time();
 
 			if($_POST['save'] == 'on') {
-				setcookie('email', $_POST['email'], time()+60*60*24*14);
+				setcookie('email', $_POST['email'], time()+60*60*24*365);
 			}
 			header('Location: index.php');
       		exit();

@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
 if(isset($_REQUEST['id'])) {
@@ -49,7 +50,7 @@ if(!empty($_POST)) {
 <h1>掲示板だよ～って</h1>
 <img src="user_img/<?php echo(htmlspecialchars($post['user_img'], ENT_QUOTES)); ?>" alt="プロフィール画像">
 <p><?php echo(htmlspecialchars($post['name'], ENT_QUOTES)); ?></p>
-<p><?php echo(htmlspecialchars($post['message'], ENT_QUOTES)); ?></p>
+<p><?php echo nl2br(htmlspecialchars($post['message'], ENT_QUOTES)); ?></p>
 <?php if(isset($post['picture'])): ?>
 	<p>投稿画像</p>
 <img src="picture/<?php echo(htmlspecialchars($post['picture'], ENT_QUOTES));?>" alt="">

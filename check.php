@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
 if (!isset($_SESSION['join'])) {

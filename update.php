@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 require('dbconnect.php');
 
 $url = 'update.php?update_id='.$_SESSION['id'];
@@ -21,7 +22,7 @@ if($_SESSION['id'] = $pageId){
 			$image,
 			$user['id']
 		));
-		header('Location:' . $url);
+		header('Location: myPage.php?myPage_id='.$_SESSION['id']);
 		exit();
 	}
 	if(!empty($_POST) && empty($_FILES['image']['name'])){
@@ -30,7 +31,7 @@ if($_SESSION['id'] = $pageId){
 			$_POST['name'],
 			$_SESSION['id']
 		));
-		header('Location:' . $url);
+		header('Location: myPage.php?myPage_id='.$_SESSION['id']);
 		exit();
 	}
 }
