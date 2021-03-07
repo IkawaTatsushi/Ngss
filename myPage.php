@@ -65,7 +65,9 @@ if(!empty($_REQUEST['myPage_id'])){
 <?php if(isset($myPage['picture'])): ?>
 <img src="picture/<?php echo(htmlspecialchars($myPage['picture'], ENT_QUOTES));?>" class="img-fluid" alt="投稿画像">
 <?php endif; ?>
-<a href="" class="btn btn-dark float-right">削除</a>
+<div class="row">
+<a href="" class="btn btn-dark col-1 offset-10 mt-3">削除</a>
+</div>
 <small class="text-muted"><?php echo(htmlspecialchars($myPage['created'], ENT_QUOTES));?></small>
 <a href="delete.php?id=<?php echo(htmlspecialchars($myPage['id'])); ?>">削除</a>
 </div>
