@@ -45,22 +45,8 @@ if (!empty($_POST)) {
     <div class="row">
 		<div class="col-lg-5 offset-lg-3">
 			<div class="box box1">
-				<div class="input-group input-group1">
-					<span class="input-group-addon addon-facebook addon-facebook1">
-						<i class="fab fa-facebook-square fa-2x"></i>
-					</span>
-					<a class="btn btn-lg btn-block btn-facebook btn-facebook1" href="#"> Facebookでログイン</a>
-				</div>
-
-				<div class="input-group input-group1">
-					<span class="input-group-addon addon-twitter addon-twitter1">
-						<i class="fab fa-twitter-square fa-2x"></i>
-					</span>
-					<a class="btn btn-lg btn-block btn-twitter btn-twitter1" href="#"> Twitterでログイン</a>
-				</div>
 
 				<form role="form" action="" method="post">
-
 					<div class="divider-form divider-form1"></div>
 
 					<div class="form-group">

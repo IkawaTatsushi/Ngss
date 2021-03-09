@@ -9,6 +9,11 @@ if(!empty($_POST)){
     u, posts p WHERE u.id=p.user_id AND message LIKE ? ORDER BY p.created DESC');
     $searchs->execute(array($keyword));
 }
+
+$num = 100;
+
+var_dump($num);
+exit;
 ?>
 <?php require('header.php'); ?>
 <div class="container">

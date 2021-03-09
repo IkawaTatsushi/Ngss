@@ -3,7 +3,7 @@ session_start();
 session_regenerate_id(true);
 require('function.php');
 
-if(isset($_REQUEST['id']) && $_SESSION['id']){
+if(isset($_REQUEST['id']) && isset($_SESSION['id'])){
 
     $follow_checks = $db->prepare('SELECT follow FROM follow WHERE user_id=?');
     $follow_checks->execute(array($_SESSION['id']));

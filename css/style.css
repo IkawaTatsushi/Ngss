@@ -107,9 +107,6 @@
     }
   }
 
-  @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
-@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
-
 body {
     background-color: #f0f3f5;
 	font-family: 'Roboto';
@@ -208,4 +205,15 @@ strong {
 .show_picture{
   width: 625px;
   height: auto;
+}
+.good{
+  color: rgb(236, 52, 52);
+}
+.good_count{
+  font-size: 25px;
+  text-decoration: none;
+}
+.good:hover{
+  color: rgb(243, 102, 102);
+  text-decoration: none;
 }
