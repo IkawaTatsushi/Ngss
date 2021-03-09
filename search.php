@@ -4,16 +4,11 @@ session_regenerate_id(true);
 require('function.php');
 
 if(!empty($_POST)){
-    $keyword = '%'.$_POST['search'].'%';
-    $searchs = $db->prepare('SELECT u.name, u.user_img, p.* FROM users 
+    $key = '%'.$_POST['search'].'%';
+    $searches = $db->prepare('SELECT u.name, u.user_img, p.* FROM users 
     u, posts p WHERE u.id=p.user_id AND message LIKE ? ORDER BY p.created DESC');
-    $searchs->execute(array($keyword));
+    $searches->execute(array($key));
 }
-
-$num = 100;
-
-var_dump($num);
-exit;
 ?>
 <?php require('header.php'); ?>
 <div class="container">
@@ -22,7 +17,7 @@ exit;
 
 <div class="wrapper"></div>
 <h1>検索結果</h1>
-<?php foreach ($searchs as $search): ?>
+<?php foreach ($searches as $search): ?>
 <div class="card mb-5 pb-3">
   <div class="card-body">
 	  <div class="d-flex">
