@@ -1,11 +1,11 @@
-▼言語
-HTML,CSS,PHP,JavaScript,MySql
-▼フレームワーク
-Bootstrap,Jquery
-
-言語選定理由
-初めはDocker,RubyOnRailsを主に学習していましたが、北海道では需要が無い事を知った為、
-多くの実績があるPHPを使用しました。
+▼言語  
+HTML,CSS,PHP,JavaScript,MySql  
+▼フレームワーク  
+Bootstrap,Jquery  
+  
+言語選定理由  
+初めはDocker,RubyOnRailsを主に学習していましたが、北海道では需要が無い事を知った為、  
+多くの実績があるPHPを使用しました。  
 
 この度はお忙しい中、ポートフォリオを見てくださってありがとうございます。
 本アプリはUdemyの教材"PHP+MySQL（MariaDB） Webサーバーサイドプログラミング入門"
