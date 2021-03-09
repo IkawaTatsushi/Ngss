@@ -4,8 +4,8 @@ session_regenerate_id(true);
 require('function.php');
 
 if(isset($_REQUEST['id']) && isset($_SESSION['id'])){
-    $follow = $db->prepare('DELETE FROM follow WHERE user_id=? AND follow=?');
-    $follow->execute(array(
+    $favorite = $db->prepare('DELETE FROM favorite WHERE user_id=? AND post_id=?');
+    $favorite->execute(array(
         $_SESSION['id'],
         $_REQUEST['id']
     ));
