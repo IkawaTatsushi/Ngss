@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>GSP</title>
 </head>
@@ -25,17 +26,22 @@
       <li class="nav-item">
         <a class="nav-link" href="index.php">投稿一覧</a>
       </li>
-      <?php if(!empty($_SESSION['id'])): ?>
+<?php if(!empty($_SESSION['id'])): ?>
+      <li class="nav-item">
+        <a class="nav-link" href="post.php">投稿する</a>
+<?php endif; ?>
+      </li>
+<?php if(!empty($_SESSION['id'])): ?>
         <li class="nav-item">
         <a class="nav-link " href="logout.php">ログアウト</a>
         </li>
         <li class="nav-item">
         <a class="nav-link " href="myPage.php?myPage_id=<?php echo $_SESSION['id'];?>">マイページ</a>
         </li>
-        <?php else: ?>
+<?php else: ?>
         <li class="nav-item">
         <a class="nav-link " href="login.php">ログイン</a>
-        <?php endif; ?>
+<?php endif; ?>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
