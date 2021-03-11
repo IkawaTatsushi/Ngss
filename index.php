@@ -1,45 +1,21 @@
 <?php
-session_start();
-session_regenerate_id(true);
 require('function.php');
 
-if(isset($_SESSION['id']) && $_SESSION['time'] + 60*60*24*365 > time()) {
+if(isset($_SESSION['id']) && $_SESSION['time'] + 60*60*4 > time()) {
 	$_SESSION['time'] = time();
 
-	$users = $db->prepare('SELECT * FROM users WHERE id=?');
-	$users->execute(array($_SESSION['id']));
-	$user = $users->fetch();
-}else {
-	header('Location: login.php');
-	exit();
+	$page = $_REQUEST['page'];
+  	if ($page == '') {
+    	$page = 1;
+  	}
+  	$page = max($page,1);
+	$cnt = getPageCount();
+	$maxPage = ceil($cnt['cnt'] / 5);
+ 	$page = min($page, $maxPage);
+ 	$start = ($page -1) * 5;
+	$posts = getPostData($data);
+    $check = getFavorite($_SESSION['id']);
 }
-
-$page = $_REQUEST['page'];
-  if ($page == '') {
-    $page = 1;
-  }
-  $page = max($page,1);
-
-  $counts = $db->query('SELECT COUNT(*) AS cnt FROM 
-  posts');
-  $cnt = $counts->fetch();
-  $maxPage = ceil($cnt['cnt'] / 5);
-  $page = min($page, $maxPage);
-  
-  $start = ($page -1) * 5;
-
-  $posts = $db->prepare('SELECT u.id, u.name, u.user_img, p.*, COUNT(f.user_id)  AS good FROM users u RIGHT JOIN posts p 
-  ON u.id=p.user_id LEFT JOIN favorite f ON p.id = f.post_id GROUP BY p.id ORDER BY p.created DESC LIMIT ?,5');
-  $posts->bindParam(1,$start, PDO::PARAM_INT);
-  $posts->execute();
-
-  $favorite_checks = $db->prepare('SELECT post_id FROM favorite WHERE user_id=?');
-  $favorite_checks->execute(array($_SESSION['id']));
-
-  while($favorite_check = $favorite_checks->fetch()){
-	$check[]=$favorite_check['post_id'];
-  }
-
 ?>
 
 <?php require('header.php'); ?>
