@@ -1,41 +1,22 @@
 <?php
-session_start();
-session_regenerate_id(true);
 require('function.php');
 
 if(!empty($_POST)) {
-	if ($_POST['name'] === ''){
-		$error['name'] = 'blank';
-	}
-	if ($_POST['email'] === ''){
-		$error['email'] = 'blank';
-	}
-	if (strlen($_POST['password']) < 4){
-		$error['password'] ='length';
-	}
-	if ($_POST['password'] === ''){
-		$error['password'] = 'blank';
-	}
-	$fileName = $_FILES['image']['name'];
-	if 	(!empty($fileName)) {
-		$ext = substr($fileName, -3);
-		if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png' && $ext != 'jpeg') {
-			$error['image'] = 'type';
-		}
-	}
+	//メールチェック
+	validEmailDup($_POST['email']);
+	validEmailType($_POST['email']);
 
-	if(empty($error)){
-		$user = $db->prepare('SELECT COUNT(*) AS cnt
-		FROM users WHERE email=?');
-		$user->execute(array($_POST['email']));
-		$record = $user->fetch();
-		if ($record['cnt'] > 0) {
-			$error['email'] = 'duplicate';
-		}
+	//未入力チェック
+	validRequired($_POST['name'], 'name');
+	validRequired($_POST['email'], 'email');
+	validRequired($_POST['password'], 'password');
+	
+	if 	(!empty($_FILES['image']['name'])) {
+		$fileName = $_FILES['image']['name'];
+		imagetype($fileName);
 	}
 	if(empty($error)) {
 		$_SESSION['join'] = $_POST;
-		
 		if(!empty($_FILES['image']['name'])){
 			$image = date('YmdHis') . $_FILES['image']['name'];
 					move_uploaded_file($_FILES['image']['tmp_name'],
@@ -44,16 +25,15 @@ if(!empty($_POST)) {
 		}else{
 			$_SESSION['join']['image'] = 'DefaultIcon.jpeg';
 		}
-
 		header('Location: check.php');
 		exit();
 	}
 }
-
-if ($_REQUEST['action'] =='rewrite' && isset($_SESSION
-['join'])) {
+if ($_REQUEST['action'] =='rewrite' && isset($_SESSION['join'])) {
 	$_POST = $_SESSION['join'];
-	$_SESSION['join']['image'] != 'DefaultIcon.jpeg' ? unlink('user_img/'.$_SESSION['join']['image']) : $a=1 ;
+	if($_SESSION['join']['image'] !== 'DefaultIcon.jpeg'){
+	unlink('user_img/'.$_SESSION['join']['image']);
+	}
 }
 ?>
 <?php require('header.php'); ?>
@@ -67,11 +47,9 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION
 	<div class="form-group row">
             <label for="inputName" class="col-sm-2 col-form-label">ユーザーネーム</label>
             <div class="col-sm-10">
-                <input type="name" name="name" maxlength="255" value="<?php print
-			(htmlspecialchars($_POST['name'], ENT_QUOTES)); ?>" class="form-control" id="inputName">
-			<?php if ($error['name'] === 'blank'): ?>
-			<small id="passwordHelpBlock" class="form-text text-muted">ユーザーネームを入力してください</small>
-			<?php endif; ?>
+                <input type="name" name="name" maxlength="255" value="<?php echo
+			(h($_POST['name'])); ?>" class="form-control" id="inputName">
+			<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('name'); ?></small>
         	</div>
             </div>
 		
@@ -80,14 +58,9 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION
         <div class="form-group row">
             <label for="inputEmail" class="col-sm-2 col-form-label">Eメール</label>
             <div class="col-sm-10">
-                <input type="email" name="email" maxlength="255" value="<?php print
-			(htmlspecialchars($_POST['email'], ENT_QUOTES)); ?>" class="form-control" id="inputEmail">
-			<?php if ($error['email'] === 'blank'): ?>
-			<small id="passwordHelpBlock" class="form-text text-muted">メールアドレスを入力してください</small>
-			<?php endif; ?>
-			<?php if ($error['email'] === 'duplicate'): ?>
-			<small id="passwordHelpBlock" class="form-text text-muted">このメールアドレスは既に使われています</small>
-			<?php endif; ?>
+                <input type="email" name="email" maxlength="255" value="<?php echo
+			(h($_POST['email'])); ?>" class="form-control" id="inputEmail">
+			<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('email'); ?></small>
             </div>
 			</div>
 		
@@ -97,13 +70,11 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION
         <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword" name="password" maxlength="20" placeholder="パスワード">
-                <small id="passwordHelpBlock" class="form-text text-muted">パスワードは4文字以上の英数字でご記入ください。</small>
+                <input type="password" class="form-control" id="inputPassword" name="password" maxlength="20">
+                <small id="passwordHelpBlock" class="error">パスワードは4文字以上の英数字でご記入ください。</small>
+				<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('password'); ?></small>
             </div>
         </div>
-		<?php if ($error['password'] === 'length'): ?>
-		<p>パスワードは4文字以上で入力してください</p>
-		<?php endif; ?>
         <!--/パスワード-->
 
         <!--ファイル選択-->

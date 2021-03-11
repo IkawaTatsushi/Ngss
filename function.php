@@ -7,6 +7,77 @@ function h($str, $encode='UTF-8'){
     return htmlspecialchars($str, ENT_QUOTES, $encode);
 }
 
+//=====================================
+//定数
+//=====================================
+//エラーメッセージ用定数
+define('MSG01', 'Eメールの形式で入力して下さい');
+define('MSG02', 'このメールアドレスは既に登録されています');
+define('MSG03', '画像はjpg,ping,gif,jpegの形式でご指定ください');
+define('MSG04', '入力必須です');
+define('MSG05', '');
+define('MSG06', '');
+define('MSG07', '');
+define('MSG08', '');
+
+$error = array();
+
+//email形式チェック
+function validEmailType($email){
+    global $error;
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL )) {
+        $error['email'] = MSG01;
+    }
+}
+
+//email重複チェック
+function validEmailDup($email){
+    global $error;
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT COUNT(*) AS cnt FROM users WHERE email = :email';
+        $data = array(':email' => $email);
+        $stmt = queryPost($dbh, $sql, $data);
+        $result = $stmt->fetch();
+        if (($result['cnt']) > 0) {
+            $error['email'] = MSG02;
+        }
+    } catch (Exception $e) {
+        $err_msg['common'] = MSG03;
+        echo 'DB接続エラー: ' . $e->getMessage();  
+    }
+}
+
+//画像拡張子を確認
+function imagetype($fileName){
+    global $error;
+    if(!preg_match( "/.*?\.jpg|.*?\.png||.*?\.gif.*?\.jpeg/i", $fileName)){
+       return $error['image'] = MSG02;
+    }
+}
+
+//未入力チェック
+function validRequired($str, $key)
+{
+    if ($str === '') {
+        global $error;
+        $error[$key] = MSG04;
+    }
+}
+
+//エラーメッセージ取得
+function getErrMsg($key)
+{
+    global $error;
+    if (!empty($error[$key])) {
+        return $error[$key];
+    }
+}
+
+
+
+
+
 //データベース取得
 function dbConnect(){
     $dsn = 'mysql:dbname=ngss;host=localhost;port=8889;charset=utf8';
