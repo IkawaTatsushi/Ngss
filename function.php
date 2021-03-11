@@ -2,13 +2,20 @@
 session_start();
 session_regenerate_id(true);
 
+//エスケープ処理
+function h($str, $encode='UTF-8'){
+    return htmlspecialchars($str, ENT_QUOTES, $encode);
+}
+
 //データベース取得
 function dbConnect(){
     $dsn = 'mysql:dbname=ngss;host=localhost;port=8889;charset=utf8';
     $user = 'root';
     $password = 'root';
-    $dbh = new PDO($dsn, $user, $password);
-    return $dbh;
+    $options = array(PDO::ATTR_EMULATE_PREPARES => false,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+        $dbh = new PDO($dsn, $user, $password, $options);
+        return $dbh;
 }
 
 //SQL実行
@@ -61,6 +68,46 @@ function getFavorite($user_id){
             $check[]=$favorite_check['post_id'];
         }
         return $check;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//フォローチェック
+function getFollow($user_id, $re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT * FROM follow WHERE user_id = :user_id AND follow = :follow';
+        $data = array(':user_id' => $user_id, ':follow' => $re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt->fetch();
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//各ユーザーの登録情報取得
+function getUser($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT * FROM users WHERE id = :re_id';
+        $data = array(':re_id' => $re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt->fetch();
+            
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+//各ユーザーの投稿情報取得
+function getUserContents($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.name, u.user_img, p.* FROM users 
+        u, posts p WHERE u.id = :re_id AND u.id = p.user_id ORDER BY p.created';
+        $data = array(':re_id' => $re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+            return $stmt;
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     }
