@@ -2,13 +2,13 @@
 require('function.php');
 
 if(isset($_SESSION['id'])) {
-    $id = $_REQUEST['id'];
-    $message = getPost($id);
+    $user_id = $_REQUEST['id'];
+    $message = getPost($user_id);
     if($message['user_id'] == $_SESSION['id']) {
         if(file_exists('picture/'.$message['picture'])){
             unlink('picture/'.$message['picture']);
         }
-        $stmt = deletePost($id);
+        $stmt = deletePost($user_id);
         if($stmt){
         header('Location: index.php');
         exit();

@@ -168,9 +168,9 @@ function getUser($re_id){
 function getUserContents($re_id){
     try {
         $dbh = dbConnect();
-        $sql = 'SELECT u.name, u.user_img, p.* FROM users 
-        u, posts p WHERE u.id = :re_id AND u.id = p.user_id ORDER BY p.created';
-        $data = array(':re_id' => $re_id);
+        $sql = 'SELECT u.name, u.user_img, p.*, COUNT(f.user_id)  AS good FROM users u RIGHT JOIN posts p 
+        ON u.id=p.user_id LEFT JOIN favorite f ON p.id = f.post_id WHERE u.id = ? GROUP BY p.id ORDER BY p.created DESC';
+        $data = array($re_id);
         $stmt = queryPost($dbh, $sql, $data);
             return $stmt;
     } catch(PDOException $e) {
@@ -192,11 +192,11 @@ function getPost($id){
     }
 }
 //メッセージ投稿
-function createPost($message,$image,$id,$re_message_id){
+function createPost($message,$image,$user_id,$re_message_id){
     try {
         $dbh = dbConnect();
         $sql = 'INSERT INTO posts (message,picture,user_id,re_message_id) VALUES (:message,:picture,:user_id,:re_message_id)';
-        $data = array(':message' => $message,':picture' => $image,':user_id' => $id,'re_message_id' => $re_message_id);
+        $data = array(':message' => $message,':picture' => $image,':user_id' => $user_id,'re_message_id' => $re_message_id);
         $stmt = queryPost($dbh, $sql, $data);
         if($stmt){
             return $stmt;

@@ -3,10 +3,10 @@ require('function.php');
 $user_id = $_SESSION['id'];
 $re_id = $_REQUEST['myPage_id'];
 $follow_check = getFollow($user_id, $re_id);
+$check = getFavorite($user_id);
 
 if(!empty($re_id)){
 	$reUser = getUser($re_id);
-
   $contents = getUserContents($re_id);
 }
 ?>
@@ -18,8 +18,8 @@ if(!empty($re_id)){
   <img src="user_img/<?php echo h($reUser['user_img']); ?>" class="rounded-circle" alt="プロフィール画像">
   <p>ユーザーネーム</p>
   <p><?php echo h($reUser['name']);?></p>
-  <?php if($re_id　=== $user_id): ?>
-  <a href="update.php?update_id=<?php echo $_SESSION['id']; ?>">ユーザー情報を変更する</a><br>
+  <?php if($reUser['id'] == $user_id): ?>
+  <a href="update.php?update_id=<?php echo $user_id; ?>">ユーザー情報を変更する</a><br>
   <?php endif; ?>
   <a href="follow_view.php?id=<?php echo $reUser['id']; ?>">フォロー</a>
   <a href="follower_view.php?id=<?php echo $reUser['id']; ?>">フォロワー</a><br>
@@ -42,8 +42,13 @@ if(!empty($re_id)){
 <?php if(isset($content['picture'])): ?>
     <img src="picture/<?php echo h($content['picture']);?>" class="img-fluid" alt="投稿画像">
 <?php endif; ?>
-      <div class="row">
-        <a href="delete.php?id=<?php echo $content['id']; ?>" class="btn btn-dark col-1 offset-10 mt-3">削除</a>
+<div class="row">
+<?php in_array($content['id'], $check) ? print'<a href="favorite_delete.php?id='.$content['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 offset-8 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>'
+:print'<a href="favorite.php?id='.$content['id'].'" class="far fa-heart fa-2x mt-3 mr-2 offset-8 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>';?>
+<a href="post.php?id=<?php echo $content['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">返信</a>
+<?php if($reUser['id'] == $user_id): ?>
+        <a href="delete.php?id=<?php echo $content['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">削除</a>
+<?php endif;?>
       </div>
       <small class="text-muted"><?php echo h($content['created']);?></small>
     </div>

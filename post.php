@@ -1,20 +1,22 @@
 <?php
 require('function.php');
 if(!empty($_SESSION['id'])){
+	$user_id = $_SESSION['id'];
 	$re_id = $_REQUEST['id'];
-	if($_FILES['image']['name'] !== ""){
-		$image = date('YmdHis') . $_FILES['image']['name'];
-				move_uploaded_file($_FILES['image']['tmp_name'],
-				'picture/'. $image);
-	}
-	$id = $_SESSION['id'];
-	$message = $_POST['message'];
-	validRequired($message, 'message');
-	if(empty($error)){
-		$stmt = createPost($message,$image,$id,$re_id);
-		if($stmt){
-			header('Location: index.php');
-			exit();
+	if(!empty($_POST)){
+		if($_FILES['image']['name'] !== ""){
+			$image = date('YmdHis') . $_FILES['image']['name'];
+					move_uploaded_file($_FILES['image']['tmp_name'],
+					'picture/'. $image);
+		}
+		$message = $_POST['message'];
+		validRequired($message, 'message');
+		if(empty($error)){
+			$stmt = createPost($message,$image,$user_id,$re_id);
+			if($stmt){
+				header('Location: index.php');
+				exit();
+			}
 		}
 	}
 }else{

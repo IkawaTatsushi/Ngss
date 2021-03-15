@@ -1,10 +1,10 @@
 <?php
 require('function.php');
-$id = $_SESSION['id'];
+$user_id = $_SESSION['id'];
 $re_id = $_REQUEST['id'];
 $post = getMessage($re_id);
 $res = getReMessage($re_id);
-$check = getFavorite($id);
+$check = getFavorite($user_id);
 ?>
 
 <?php require('header.php'); ?>
@@ -55,7 +55,7 @@ $check = getFavorite($id);
 <?php in_array($re['id'], $check) ? print'<a href="favorite_delete.php?id='.$re['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 offset-8 good"></a><span class="mt-3 good_count">'.$re['good'].'</span>'
 :print'<a href="favorite.php?id='.$re['id'].'" class="far fa-heart fa-2x mt-3 mr-2 offset-8 good"></a><span class="mt-3 good_count">'.$re['good'].'</span>';?>
 <a href="post.php?id=<?php echo $re['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">返信</a>
-			<?php if($re['user_id'] == $id): ?>
+			<?php if($re['user_id'] == $user_id): ?>
 			<a href="delete.php?id=<?php echo $re['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">削除</a>
 			</div>
 			<?php endif;?>
