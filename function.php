@@ -57,8 +57,7 @@ function imagetype($fileName){
 }
 
 //未入力チェック
-function validRequired($str, $key)
-{
+function validRequired($str, $key){
     if ($str === '') {
         global $error;
         $error[$key] = MSG04;
@@ -66,8 +65,7 @@ function validRequired($str, $key)
 }
 
 //エラーメッセージ取得
-function getErrMsg($key)
-{
+function getErrMsg($key){
     global $error;
     if (!empty($error[$key])) {
         return $error[$key];
@@ -108,7 +106,7 @@ function getPageCount(){
 }
 
 //投稿全件から5件ごとに取得
-function getPostData($data){
+function getPostAll($data){
     try {
         $dbh = dbConnect();
         $sql = 'SELECT u.id, u.name, u.user_img, p.*, COUNT(f.user_id)  AS good FROM users u RIGHT JOIN posts p 
@@ -180,4 +178,31 @@ function getUserContents($re_id){
     }
 }
 
+//メッセージ詳細取得
+function getPost($id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT * FROM posts WHERE id = :id';
+        $data = array(':id' => $id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt->fetch();
+            
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//メッセージ削除
+function deletePost($id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'DELETE FROM posts WHERE id=:id';
+        $data = array(':id' => $id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt;
+            
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
 ?>
