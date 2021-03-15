@@ -74,10 +74,6 @@ function getErrMsg($key)
     }
 }
 
-
-
-
-
 //データベース取得
 function dbConnect(){
     $dsn = 'mysql:dbname=ngss;host=localhost;port=8889;charset=utf8';
@@ -183,4 +179,5 @@ function getUserContents($re_id){
         echo 'DB接続エラー: ' . $e->getMessage();
     }
 }
+
 ?>

@@ -71,7 +71,7 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION['join'])) {
             <label for="inputPassword" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="inputPassword" name="password" maxlength="20">
-                <small id="passwordHelpBlock" class="error">パスワードは4文字以上の英数字でご記入ください。</small>
+                <small id="passwordHelpBlock">パスワードは4文字以上の英数字でご記入ください。</small>
 				<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('password'); ?></small>
             </div>
         </div>

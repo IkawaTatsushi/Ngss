@@ -1,8 +1,7 @@
 <?php
 require('function.php');
 
-if(isset($_SESSION['id']) && $_SESSION['time'] + 60*60*4 > time()) {
-	$_SESSION['time'] = time();
+if(isset($_SESSION['id'])) {
 
 	$page = $_REQUEST['page'];
   	if ($page == '') {
@@ -15,6 +14,9 @@ if(isset($_SESSION['id']) && $_SESSION['time'] + 60*60*4 > time()) {
  	$start = ($page -1) * 5;
 	$posts = getPostData($start);
     $check = getFavorite($_SESSION['id']);
+}else{
+	header('Location: login.php');
+	exit();
 }
 ?>
 

@@ -1,28 +1,33 @@
 <?php
-session_start();
-session_regenerate_id(true);
 require('function.php');
 
 if (!isset($_SESSION['join'])) {
 	header('Location: sign_up.php');
 	exit();
 }
-$hash = password_hash($_SESSION['join']['password'], PASSWORD_BCRYPT);
+	$name = $_SESSION['join']['name'];
+	$email = $_SESSION['join']['email'];
+	$user_img = $_SESSION['join']['image'];
+	$pass = $_SESSION['join']['password'];
 
-if(!empty($_POST)){
-	$statement = $db->prepare('INSERT INTO users SET 
-	name=?, email=?, user_img=?, password=?, created=NOW()');
-	$statement->execute(array(
-		$_SESSION['join']['name'],
-		$_SESSION['join']['email'],
-		$_SESSION['join']['image'],
-		$hash
-	));
-	unset($_SESSION['join']);
-	header('Location: thanks.php');
-	exit();
-}
+	if(!empty($_POST)){
+		try {
+			$dbh = dbConnect();
+			$sql = 'INSERT INTO users (name,email,user_img,password) VALUES (:name,:email,:user_img,:pass)';
+			$data = array(':name' => $name,':email' => $email,
+						':user_img' => $user_img,':pass' => password_hash($pass, PASSWORD_BCRYPT));
 
+			$stmt = queryPost($dbh, $sql, $data);
+			if($stmt){
+				unset($_SESSION['join']);
+				$_SESSION['id'] = $dbh->lastInsertId();
+				header('Location: index.php');
+			}
+		exit();
+		} catch(PDOException $e) {
+			echo 'DB接続エラー: ' . $e->getMessage();
+		}
+	}
 
 ?>
 <?php require('header.php'); ?>
