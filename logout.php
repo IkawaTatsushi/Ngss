@@ -1,5 +1,5 @@
 <?php
-session_start();
+require('function.php');
 $_SESSION = array();
 if (ini_set('session.use_cookies ')) {
     $params = session_get_cookie_params();

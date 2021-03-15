@@ -1,23 +1,18 @@
 <?php
 require('function.php');
 
-if(isset($_SESSION['id'])) {
-
-	$page = $_REQUEST['page'];
-  	if ($page == '') {
-    	$page = 1;
-  	}
-  	$page = max($page,1);
-	$cnt = getPageCount();
-	$maxPage = ceil($cnt['cnt'] / 5);
- 	$page = min($page, $maxPage);
- 	$start = ($page -1) * 5;
-	$posts = getPostAll($start);
-    $check = getFavorite($_SESSION['id']);
-}else{
-	header('Location: login.php');
-	exit();
+$page = $_REQUEST['page'];
+if ($page == '') {
+	$page = 1;
 }
+$page = max($page,1);
+$cnt = getPageCount();
+$maxPage = ceil($cnt['cnt'] / 5);
+$page = min($page, $maxPage);
+$start = ($page -1) * 5;
+$posts = getPostAll($start);
+$check = getFavorite($_SESSION['id']);
+
 ?>
 
 <?php require('header.php'); ?>

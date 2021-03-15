@@ -205,4 +205,18 @@ function deletePost($id){
         echo 'DB接続エラー: ' . $e->getMessage();
     }
 }
+//検索結果取得
+function getSearch($key){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.name, u.user_img, p.* FROM users 
+        u, posts p WHERE u.id=p.user_id AND message LIKE ? ORDER BY p.created DESC';
+        $data = array($key);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt;
+            
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
 ?>

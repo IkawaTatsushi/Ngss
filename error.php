@@ -1,6 +1,4 @@
 <?php
-session_start();
-session_regenerate_id(true);
 require('function.php');
 ?>
 <?php require('header.php'); ?>
