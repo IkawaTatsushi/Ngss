@@ -15,7 +15,7 @@ define('MSG01', 'Eメールの形式で入力して下さい');
 define('MSG02', 'このメールアドレスは既に登録されています');
 define('MSG03', '画像はjpg,ping,gif,jpegの形式でご指定ください');
 define('MSG04', '入力必須です');
-define('MSG05', '');
+define('MSG05', 'メッセージの投稿に失敗しました');
 define('MSG06', '');
 define('MSG07', '');
 define('MSG08', '');
@@ -121,7 +121,7 @@ function getPostAll($data){
     
 }
 
-//いいねしたメッセージを全件を配列に挿入
+//いいねしたメッセージ全件の投稿IDを配列に挿入
 function getFavorite($user_id){
     try {
         $dbh = dbConnect();
@@ -191,6 +191,23 @@ function getPost($id){
         echo 'DB接続エラー: ' . $e->getMessage();
     }
 }
+//メッセージ投稿
+function createPost($message,$image,$id,$re_message_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'INSERT INTO posts (message,picture,user_id,re_message_id) VALUES (:message,:picture,:user_id,:re_message_id)';
+        $data = array(':message' => $message,':picture' => $image,':user_id' => $id,'re_message_id' => $re_message_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        if($stmt){
+            return $stmt;
+        }else{
+            global $error;
+            $error['message'] = MSG05;
+        }
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
 
 //メッセージ削除
 function deletePost($id){
@@ -212,6 +229,36 @@ function getSearch($key){
         $sql = 'SELECT u.name, u.user_img, p.* FROM users 
         u, posts p WHERE u.id=p.user_id AND message LIKE ? ORDER BY p.created DESC';
         $data = array($key);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt;
+            
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//メッセージ詳細取得
+function getMessage($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.id, u.name, u.user_img, p.*, COUNT(f.user_id)  AS good FROM users u RIGHT JOIN posts p 
+        ON u.id=p.user_id LEFT JOIN favorite f ON p.id = f.post_id WHERE p.id = ? GROUP BY p.id ORDER BY p.created DESC';
+        $data = array($re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt->fetch();
+            
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//返信メッセージ取得
+function getReMessage($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.id, u.name, u.user_img, p.*, COUNT(f.user_id)  AS good FROM users u RIGHT JOIN posts p 
+        ON u.id=p.user_id LEFT JOIN favorite f ON p.id = f.post_id WHERE p.re_message_id = ? GROUP BY p.id ORDER BY p.created DESC';
+        $data = array($re_id);
         $stmt = queryPost($dbh, $sql, $data);
         return $stmt;
             
