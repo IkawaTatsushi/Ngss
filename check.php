@@ -41,13 +41,13 @@ if (!isset($_SESSION['join'])) {
 	<thead>
 		<tr>
 		<th scope="col">ユーザーネーム</th>
-		<th scope="col"><?php echo(htmlspecialchars($_SESSION['join']['name'], ENT_QUOTES)); ?></th>
+		<th scope="col"><?php echo h($_SESSION['join']['name']); ?></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 		<th scope="row">メールアドレス</th>
-		<td><?php echo(htmlspecialchars($_SESSION['join']['email'], ENT_QUOTES)); ?></td>
+		<td><?php echo h($_SESSION['join']['email']); ?></td>
 		</tr>
 		<tr>
 		<th scope="row">パスワード</th>
@@ -56,7 +56,7 @@ if (!isset($_SESSION['join'])) {
 		<tr>
 		<th scope="row">プロフィール画像</th>
 		<td><?php if ($_SESSION['join']['name'] !==''): ?>
-		<img src="user_img/<?php echo(htmlspecialchars($_SESSION['join']['image'], ENT_QUOTES)); ?>" class="rounded-circle" alt="プロフィール画像">
+		<img src="user_img/<?php echo h($_SESSION['join']['image']); ?>" class="rounded-circle" alt="プロフィール画像">
 	<?php endif; ?></td>
 		</tr>
 	</tbody>

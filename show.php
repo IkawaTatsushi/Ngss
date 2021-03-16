@@ -30,8 +30,8 @@ $check = getFavoriteAll($user_id);
 <a href="post.php?id=<?php echo $post['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">返信</a>
 				<?php if($post['user_id'] == $_SESSION['id']): ?>
 					<a href="delete.php?id=<?php echo $post['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">削除</a>
-				</div>
-				<?php endif;?>
+					<?php endif;?>
+				</div>	
 			</div>
 			<a href="index.php">戻る</a>
 
@@ -57,12 +57,10 @@ $check = getFavoriteAll($user_id);
 <a href="post.php?id=<?php echo $re['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">返信</a>
 			<?php if($re['user_id'] == $user_id): ?>
 			<a href="delete.php?id=<?php echo $re['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">削除</a>
-			</div>
 			<?php endif;?>
 			</div>
-			<?php endforeach; ?>
-
 			</div>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </div>

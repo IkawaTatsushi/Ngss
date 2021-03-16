@@ -16,7 +16,9 @@ $check = getFollowAll($user_id);
 <?php foreach($follows as $follow): ?>
     <img src="user_img/<?php echo h($follow['user_img']) ?>" alt="プロフ写真" class="rounded-circle">
     <a href="myPage.php?myPage_id=<?php echo $follow['id']?>"><?php echo h($follow['name'])?></a>
-
+<?php if($follow['id'] == $user_id):?>
+    <br>
+<?php endif; ?>
 <?php if($_SESSION['id'] !== $follow['id']){
 in_array($follow['id'], $check) ? print '<a href="follow_delete.php?id='.$follow['id'].'"class="btn btn-primary">フォローをはずす</a><br>'
 :print '<a href="follow.php?id='.$follow['id'].'"class="btn btn-primary">フォローする</a><br>';}?>
