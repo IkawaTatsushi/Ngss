@@ -284,8 +284,8 @@ function deletePost($id){
 function getSearch($key){
     try {
         $dbh = dbConnect();
-        $sql = 'SELECT u.name, u.user_img, p.* FROM users 
-        u, posts p WHERE u.id=p.user_id AND message LIKE ? ORDER BY p.created DESC';
+        $sql = 'SELECT u.name, u.user_img, p.*, COUNT(f.user_id)  AS good FROM users u RIGHT JOIN posts p 
+        ON u.id=p.user_id LEFT JOIN favorite f ON p.id = f.post_id WHERE message LIKE ? GROUP BY p.id ORDER BY p.created DESC';
         $data = array($key);
         $stmt = queryPost($dbh, $sql, $data);
         return $stmt;
