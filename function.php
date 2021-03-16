@@ -379,4 +379,27 @@ function favoriteDelete($re_id,$user_id){
         echo 'DB接続エラー: ' . $e->getMessage();
     }
 }
+
+function updateAll($name,$image,$user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'UPDATE users SET name=?, user_img=? WHERE id=?';
+        $data = array($name,$image,$user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+            return $stmt;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+function update($name,$user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'UPDATE users SET name=? WHERE id=?';
+        $data = array($name,$user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+            return $stmt;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
 ?>
