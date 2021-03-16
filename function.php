@@ -152,7 +152,7 @@ function getFavorite($user_id,$re_id){
     }
 }
 
-//フォローチェック
+//マイページで自分がフォローしているかを取得
 function getFollow($user_id, $re_id){
     try {
         $dbh = dbConnect();
@@ -160,6 +160,38 @@ function getFollow($user_id, $re_id){
         $data = array(':user_id' => $user_id, ':follow' => $re_id);
         $stmt = queryPost($dbh, $sql, $data);
         return $stmt->fetch();
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//フォロー一覧を取得
+function getFollowView($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.id, u.name, u.user_img, f.* FROM users 
+        u, follow f WHERE u.id=f.follow AND f.user_id=? ORDER BY f.created DESC';
+        $data = array($re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt;
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//自分の全フォロー一覧取得
+function getFollowAll($user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT follow FROM follow WHERE user_id=?';
+        $data = array($user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+
+        while($result = $stmt->fetch()){
+            $check[]=$result['follow'];
+        }
+        return $check;
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     }
