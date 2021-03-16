@@ -3,7 +3,7 @@ require('function.php');
 $user_id = $_SESSION['id'];
 $re_id = $_REQUEST['myPage_id'];
 $follow_check = getFollow($user_id, $re_id);
-$check = getFavorite($user_id);
+$check = getFavoriteAll($user_id);
 
 if(!empty($re_id)){
 	$reUser = getUser($re_id);

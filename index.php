@@ -11,7 +11,7 @@ $maxPage = ceil($cnt['cnt'] / 5);
 $page = min($page, $maxPage);
 $start = ($page -1) * 5;
 $posts = getPostAll($start);
-$check = getFavorite($user_id);
+$check = getFavoriteAll($user_id);
 
 ?>
 

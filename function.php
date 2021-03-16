@@ -122,7 +122,7 @@ function getPostAll($data){
 }
 
 //いいねしたメッセージ全件の投稿IDを配列に挿入
-function getFavorite($user_id){
+function getFavoriteAll($user_id){
     try {
         $dbh = dbConnect();
         $sql = 'SELECT post_id FROM favorite WHERE user_id = :user_id';
@@ -133,6 +133,20 @@ function getFavorite($user_id){
             $check[]=$favorite_check['post_id'];
         }
         return $check;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//自分がいいねしているかチェック
+function getFavorite($user_id,$re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT * FROM favorite WHERE post_id=? AND user_id=?';
+        $data = array($user_id,$re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt->fetch();
+
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     }
@@ -286,6 +300,32 @@ function followDelete($user_id,$re_id){
         $dbh = dbConnect();
         $sql = 'DELETE FROM follow WHERE user_id=? AND follow=?';
         $data = array($user_id,$re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+            return $stmt;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//いいねする
+function favorite($re_id,$user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'INSERT INTO favorite SET post_id=?, user_id=?';
+        $data = array($re_id,$user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+            return $stmt;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//いいねをはずす
+function favoriteDelete($re_id,$user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'DELETE FROM favorite WHERE post_id=? AND user_id=?';
+        $data = array($re_id,$user_id);
         $stmt = queryPost($dbh, $sql, $data);
             return $stmt;
     } catch(PDOException $e) {

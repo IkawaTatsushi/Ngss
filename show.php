@@ -4,7 +4,7 @@ $user_id = $_SESSION['id'];
 $re_id = $_REQUEST['id'];
 $post = getMessage($re_id);
 $res = getReMessage($re_id);
-$check = getFavorite($user_id);
+$check = getFavoriteAll($user_id);
 ?>
 
 <?php require('header.php'); ?>
