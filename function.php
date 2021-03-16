@@ -16,9 +16,6 @@ define('MSG02', 'このメールアドレスは既に登録されています');
 define('MSG03', '画像はjpg,ping,gif,jpegの形式でご指定ください');
 define('MSG04', '入力必須です');
 define('MSG05', 'メッセージの投稿に失敗しました');
-define('MSG06', '');
-define('MSG07', '');
-define('MSG08', '');
 
 $error = array();
 
