@@ -16,6 +16,8 @@ if(!empty($_SESSION['id'])){
 			if($stmt){
 				header('Location: index.php');
 				exit();
+			}else{
+				header('Location: error.php');
 			}
 		}
 	}

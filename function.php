@@ -266,4 +266,30 @@ function getReMessage($re_id){
         echo 'DB接続エラー: ' . $e->getMessage();
     }
 }
+
+//フォローする
+function follow($user_id,$re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'INSERT INTO follow SET user_id=?, follow=?';
+        $data = array($user_id,$re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+            return $stmt;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//フォローを外す
+function followDelete($user_id,$re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'DELETE FROM follow WHERE user_id=? AND follow=?';
+        $data = array($user_id,$re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+            return $stmt;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
 ?>
