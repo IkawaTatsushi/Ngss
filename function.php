@@ -180,6 +180,21 @@ function getFollowView($re_id){
     }
 }
 
+//フォロワー一覧を取得
+function getFollowerView($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.id, u.name, u.user_img, f.* FROM users 
+        u, follow f WHERE u.id=f.user_id AND f.follow=? ORDER BY f.created DESC';
+        $data = array($re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt;
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
 //自分の全フォロー一覧取得
 function getFollowAll($user_id){
     try {
