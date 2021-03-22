@@ -1,4 +1,4 @@
-  
+▼言語  
 HTML,CSS,PHP,JavaScript,MySql  
 
 ▼フレームワーク  
