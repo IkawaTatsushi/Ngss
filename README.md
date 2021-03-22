@@ -4,6 +4,9 @@ HTML,CSS,PHP,JavaScript,MySql
 ▼フレームワーク  
 Bootstrap,Jquery  
 
+▼URL
+http://syokkun5555.php.xdomain.jp/ngss/login.php
+
 ▼言語選定理由  
 初めはDocker,RubyOnRailsを主に学習していましたが、北海道では需要が少なく、
 未経験からRuby案件に入る事は難しいと知り、Web開発に強く実績も多いPHPを使用しました。  
