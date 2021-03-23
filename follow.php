@@ -14,7 +14,7 @@ if(isset($_REQUEST['id']) && isset($_SESSION['id'])){
         exit();
     }
 }else{
-    header('Location: error.php');
-    exit();
+    echo 'ログインしてください';
+    echo '<a href="login.php">ログイン</a>';
 }
 ?>

@@ -10,9 +10,6 @@ require('header.php');
                   <li><img src="img/c.jpg"></li>
                   <li><img src="img/d.jpg"></li>
                   <li><img src="img/e.jpg"></li>
-                  <div class="title">
-                    <span>#</span>美麗な1枚を
-                  </div>
               </ul>
             </main>
 </div>

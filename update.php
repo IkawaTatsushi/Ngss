@@ -28,10 +28,10 @@ if($user_id == $pageId){
 <div class="wrapper"></div>
 <form action="" method="post" enctype="multipart/form-data">
 ユーザーネーム: <input type="text" name="name" value="<?php echo h($user['name']); ?>">
-<img src="user_img/<?php echo h($user['user_img']); ?>" alt="プロフィール画像"><br>
+<img src="user_img/<?php echo h($user['user_img']); ?>" class="rounded-circle" alt="プロフィール画像"><br>
 画像を変更する
 <input type="file" name="image" class="form-control-file" id="image">
-<img id="preview">
+<img id="preview" class="rounded-circle">
 <input type="submit" value="変更する">
 </form>
 <br>

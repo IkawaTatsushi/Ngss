@@ -47,12 +47,14 @@ if (!empty($_POST)) {
 							<small id="passwordHelpBlock" class="form-text text-muted">正しいメールアドレスとパスワードをご記入ください</small>
 						<?php endif; ?>
 						<label class="label1" for="exampleInputEmail1">メールアドレス</label>
+						<p>ゲスト:test5@gmail.com</p>
 						<input type="email" name="email" size="35" maxlength="255" class="form-control form-control1" id="exampleInputEmail1" placeholder="email">
 					</div>
 					<div class="divider-form divider-form1"></div>
 
 					<div class="form-group">
 						<label class="label1" for="exampleInputPassword1">パスワード</label>
+						<p>ゲスト:test1212</p>
 						<input type="password" name="pass" size="10" maxlength="20" class="form-control form-control1" id="exampleInputPassword1" placeholder="Password">
 					</div>
 					<div class="divider-form divider-form1"></div>

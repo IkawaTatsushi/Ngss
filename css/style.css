@@ -113,13 +113,12 @@ strong {
 }
 .rounded-circle{
   width: 75px;
-  height: auto;
+  height: 75px;
   object-fit: cover;
 }
 #preview{
   width: 200px;
   height: auto;
-  object-fit: cover;
 }
 .show_picture{
   width: 625px;

@@ -22,8 +22,8 @@ if(!empty($_SESSION['id'])){
 		}
 	}
 }else{
-	header('Location: index.php');
-	exit();
+	echo 'ログインしてください';
+    echo '<a href="login.php">ログイン</a>';
 }
 ?>
 <?php require('header.php'); ?>

@@ -21,13 +21,13 @@ if(!empty($re_id)){
   <?php if($reUser['id'] == $user_id): ?>
   <a href="update.php?update_id=<?php echo $user_id; ?>">ユーザー情報を変更する</a><br>
   <?php endif; ?>
-  <a href="follow_view.php?id=<?php echo $reUser['id']; ?>">フォロー</a>
-  <a href="follower_view.php?id=<?php echo $reUser['id']; ?>">フォロワー</a><br>
+  <a href="follow_view.php?id=<?php echo $reUser['id']; ?>" class="btn btn-primary">フォロー</a>
+  <a href="follower_view.php?id=<?php echo $reUser['id']; ?>" class="btn btn-primary">フォロワー</a><br>
   <?php if($re_id !== $user_id && empty($follow_check)): ?>
-  <a href="follow.php?id=<?php echo $reUser['id'];?>">フォローする</a><br>
+  <a href="follow.php?id=<?php echo $reUser['id'];?>" class="btn btn-primary mt-3">フォローする</a><br>
   <?php endif; ?>
   <?php if($re_id !== $user_id && !empty($follow_check)): ?>
-  <a href="follow_delete.php?id=<?php echo $reUser['id'];?>">フォローをはずす</a>
+  <a href="follow_delete.php?id=<?php echo $reUser['id'];?>" class="btn btn-primary mt-3">フォローをはずす</a>
   <?php endif; ?>
   <h1>投稿一覧</h1>
   <?php foreach ($contents as $content): ?>
