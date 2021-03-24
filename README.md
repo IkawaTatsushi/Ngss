@@ -8,8 +8,8 @@ Bootstrap,Jquery
 http://syokkun5555.php.xdomain.jp/ngss/login.php  
 
 ▼言語選定理由  
-初めはDocker,RubyOnRailsを主に学習していましたが、北海道では需要が少なく、  
-未経験からRuby案件に入る事は難しいと知り、Web開発に強く実績も多いPHPを使用しました。  
+現場で使われることの多いLaravelを学習することを視野に入れ、  
+基礎学習をする為PHPを選択しました。  
 
 ▼製作期間  
 1か月程度。時間にすると40時間程です。  
