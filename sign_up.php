@@ -37,36 +37,30 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION['join'])) {
 }
 ?>
 <?php require('header.php'); ?>
-<div class="wrapper">
-<!-- Page Content -->
+<div class="wrapper"></div>
 <div class="container">
 	<h1>ユーザー登録</h1>
 	<p>次のフォームに必要事項をご記入ください。</p>
 
     <form action="" method="post" enctype="multipart/form-data">
-	<div class="form-group row">
+		<div class="form-group row">
             <label for="inputName" class="col-sm-2 col-form-label">ユーザーネーム</label>
             <div class="col-sm-10">
                 <input type="name" name="name" maxlength="255" value="<?php echo
-			(h($_POST['name'])); ?>" class="form-control" id="inputName">
-			<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('name'); ?></small>
+				(h($_POST['name'])); ?>" class="form-control" id="inputName">
+				<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('name'); ?></small>
         	</div>
-            </div>
+        </div>
 		
-
-        <!--Eメール-->
         <div class="form-group row">
             <label for="inputEmail" class="col-sm-2 col-form-label">Eメール</label>
             <div class="col-sm-10">
                 <input type="email" name="email" maxlength="255" value="<?php echo
-			(h($_POST['email'])); ?>" class="form-control" id="inputEmail">
-			<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('email'); ?></small>
+				(h($_POST['email'])); ?>" class="form-control" id="inputEmail">
+				<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('email'); ?></small>
             </div>
-			</div>
-		
-        <!--/Eメール-->
+		</div>
 
-        <!--パスワード-->
         <div class="form-group row">
             <label for="inputPassword" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-10">
@@ -74,27 +68,17 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION['join'])) {
 				<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('password'); ?></small>
             </div>
         </div>
-        <!--/パスワード-->
 
-        <!--ファイル選択-->
         <div class="mb-3">
-  <label for="formFileMultiple" class="form-label">プロフィール画像</label>
-  <input class="form-control" type="file" name="image" size="35" value="test" id="formFileMultiple" multiple>
-</div>
-        <!--/ファイル選択-->
-		
+  			<label for="formFileMultiple" class="form-label">プロフィール画像</label>
+  			<input class="form-control" type="file" name="image" size="35" value="test" id="formFileMultiple" multiple>
+		</div>
 
-        <!--ボタンブロック-->
         <div class="form-group row">
             <div class="col-sm-12">
                 <input type="submit" class="btn btn-primary btn-block" value="入力内容を確認してください">
             </div>
         </div>
-        <!--/ボタンブロック-->
     </form>
-</div><!-- /container -->
 </div>
-<?php
-require('footer.php');
-?>
-</html>
+<?php require('footer.php');?>

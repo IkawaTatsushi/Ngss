@@ -25,16 +25,15 @@ if($user_id == $pageId){
 
 <?php require('header.php'); ?>
 <div class="container">
-<div class="wrapper"></div>
-<form action="" method="post" enctype="multipart/form-data">
-ユーザーネーム: <input type="text" name="name" value="<?php echo h($user['name']); ?>">
-<img src="user_img/<?php echo h($user['user_img']); ?>" class="rounded-circle" alt="プロフィール画像"><br>
-画像を変更する
-<input type="file" name="image" class="form-control-file" id="image">
-<img id="preview" class="rounded-circle">
-<input type="submit" value="変更する">
-</form>
-<br>
-<a href="myPage.php?myPage_id=<?php echo $user_id; ?>">戻る</a>
+	<div class="wrapper"></div>
+	<form action="" method="post" enctype="multipart/form-data">
+		ユーザーネーム: <input type="text" name="name" value="<?php echo h($user['name']); ?>">
+		<img src="user_img/<?php echo h($user['user_img']); ?>" class="rounded-circle" alt="プロフィール画像"><br>
+		画像を変更する
+		<input type="file" name="image" class="form-control-file" id="image">
+		<img id="preview" class="rounded-circle">
+		<input type="submit" value="変更する">
+	</form><br>
+	<a href="myPage.php?myPage_id=<?php echo $user_id; ?>">戻る</a>
 </div>
 <?php require('footer.php'); ?>

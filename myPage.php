@@ -18,19 +18,19 @@ if(!empty($re_id)){
   <img src="user_img/<?php echo h($reUser['user_img']); ?>" class="rounded-circle" alt="プロフィール画像">
   <p>ユーザーネーム</p>
   <p><?php echo h($reUser['name']);?></p>
-  <?php if($reUser['id'] == $user_id): ?>
+<?php if($reUser['id'] == $user_id): ?>
   <a href="update.php?update_id=<?php echo $user_id; ?>">ユーザー情報を変更する</a><br>
-  <?php endif; ?>
+<?php endif; ?>
   <a href="follow_view.php?id=<?php echo $reUser['id']; ?>" class="btn btn-primary">フォロー</a>
   <a href="follower_view.php?id=<?php echo $reUser['id']; ?>" class="btn btn-primary">フォロワー</a><br>
-  <?php if($re_id !== $user_id && empty($follow_check)): ?>
+<?php if($re_id !== $user_id && empty($follow_check)): ?>
   <a href="follow.php?id=<?php echo $reUser['id'];?>" class="btn btn-primary mt-3">フォローする</a><br>
-  <?php endif; ?>
-  <?php if($re_id !== $user_id && !empty($follow_check)): ?>
+<?php endif; ?>
+<?php if($re_id !== $user_id && !empty($follow_check)): ?>
   <a href="follow_delete.php?id=<?php echo $reUser['id'];?>" class="btn btn-primary mt-3">フォローをはずす</a>
-  <?php endif; ?>
+<?php endif; ?>
   <h1>投稿一覧</h1>
-  <?php foreach ($contents as $content): ?>
+<?php foreach ($contents as $content): ?>
     <div class="card mb-5">
       <div class="card-body">
         <div class="d-flex">
@@ -42,17 +42,17 @@ if(!empty($re_id)){
 <?php if(isset($content['picture'])): ?>
     <img src="picture/<?php echo h($content['picture']);?>" class="img-fluid" alt="投稿画像">
 <?php endif; ?>
-<div class="row">
+
+      <div class="row">
 <?php in_array($content['id'], $check) ? print'<a href="favorite_delete.php?id='.$content['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 offset-8 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>'
 :print'<a href="favorite.php?id='.$content['id'].'" class="far fa-heart fa-2x mt-3 mr-2 offset-8 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>';?>
-<a href="post.php?id=<?php echo $content['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">返信</a>
+        <a href="post.php?id=<?php echo $content['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">返信</a>
 <?php if($reUser['id'] == $user_id): ?>
         <a href="delete.php?id=<?php echo $content['id']; ?>" class="btn btn-dark col-1 mt-3 ml-3">削除</a>
 <?php endif;?>
       </div>
       <small class="text-muted"><?php echo h($content['created']);?></small>
     </div>
-  <?php endforeach; ?>
-
-</div>
+<?php endforeach; ?>
+    </div>
 <?php require('footer.php'); ?>

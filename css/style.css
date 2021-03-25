@@ -4,28 +4,6 @@
     padding: 0;
   }
   
-  /* スライドショー */
-  #wrapper{
-    width: 100%;
-    margin: 0 auto;
-  }
-  .wrapper{
-    padding-top: 10%;
-  }
-  .slideshow > li {
-    list-style-type: none;
-    opacity: 0;
-    position: absolute;
-    transition: opacity 3s ease-in-out;
-  }
-  .slideshow > li.showSlide {
-    opacity: 1;
-  }
-  .slideshow > li > img {
-    width :100%;
-    height: auto;
-  }
-
 body {
     background-color: #f0f3f5;
 	font-family: 'Roboto';
@@ -40,36 +18,6 @@ body {
 
 .input-group1 {
 	margin: 5px 0px;
-}
-
-.addon-facebook1 {
-	background-color: #345387;
-	border: none;
-	border-radius: 2px 0px 0px 2px;
-	color: #fff;
-}
-
-.btn-facebook1,
-.btn-facebook1:hover {
-	background-color: #4b6ea9;
-	color: #fff;
-	border-radius: 0px 2px 2px 0px;
-	font-size: 15px;
-}
-
-.addon-twitter1 {
-	background-color: #00c6e9;
-	border: none;
-	border-radius: 2px 0px 0px 2px;
-	color: #fff;
-}
-
-.btn-twitter1,
-.btn-twitter1:hover {
-	background-color: #00d7fa;
-	color: #fff;
-	border-radius: 0px;
-	font-size: 15px;
 }
 
 .btn-primary1 {
