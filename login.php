@@ -18,20 +18,34 @@ if (!empty($_POST)) {
 			//データベース接続
 			$dbh = dbConnect();
 
-			//usersテーブルに挿入
+			//usersテーブルからパスとメールの一致るすデータからパスワードとIDを選択
 			$sql = 'SELECT password,id FROM users WHERE email = :email';
 			$data = array(':email' => $email);
+
+			//sql実行
 			$stmt = queryPost($dbh, $sql, $data);
+
+			//あれば変数へ代入
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+			//$データベースから受け取ったパスとログインページから受け取ったパスが一致していたら
 			if (!empty($result) && password_verify($pass, array_shift($result))){
-				$_SESSION['time'] = time();
+
+				//セッション変数に自IDを代入
 				$_SESSION['id'] = $result['id'];
+
+					//メールアドレスを記憶する場合
 					if ($save){
+
+						//emailをクッキーに１年保存
 						setcookie('email', $_POST['email'], time()+60*60*24*365);
 					}
+				
+				//index.phpへ遷移
 				header('Location: index.php');
 				exit();
+
+			//パスが一致していなかったらエラー変数に値を代入
 			} else{
 				$error['pass'] = 'failed';
 			}
@@ -53,6 +67,7 @@ if (!empty($_POST)) {
 					<div class="divider-form divider-form1"></div>
 
 					<div class="form-group">
+					
 					<?php if ($error['pass'] === 'failed'): ?>
 							<small id="passwordHelpBlock" class="form-text text-muted">正しいメールアドレスとパスワードをご記入ください</small>
 						<?php endif; ?>
