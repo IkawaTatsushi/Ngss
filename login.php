@@ -1,14 +1,24 @@
 <?php
 require('function.php');
 
+//フォームから値を受け取っていたら
 if (!empty($_POST)) {
+
+	//パスとメールを変数に代入
 	$email = $_POST['email'];
     $pass = $_POST['pass'];
+
+	//メールアドレスを記憶するにチェックが入っているかチェックし変数に代入
 	$save = (!empty($_POST['save'])) ? true : false;
 
+	//メールとパスに値を受け取っていたら
 	if($email !=='' && $pass !=='') {
 		try{
+
+			//データベース接続
 			$dbh = dbConnect();
+
+			//usersテーブルに挿入
 			$sql = 'SELECT password,id FROM users WHERE email = :email';
 			$data = array(':email' => $email);
 			$stmt = queryPost($dbh, $sql, $data);
@@ -60,7 +70,7 @@ if (!empty($_POST)) {
 					<div class="divider-form divider-form1"></div>
 
 					<input type="checkbox" id="save" name="save" value="on">
-					<label class="label1" for="save">次回からは自動的にログインする</label>
+					<label class="label1" for="save">メールアドレスを記憶する</label>
 
 					<input type="submit" class="btn-block btn btn-lg btn-primary btn-primary1" value="ログイン">
 				</form>

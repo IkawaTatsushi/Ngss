@@ -1,14 +1,24 @@
 <?php
 require('function.php');
+
+//自ユーザーIDとページネーション用URLパラメータを変数へ代入
 $user_id = $_SESSION['id'];
 $page = $_REQUEST['page'];
 if ($page == '') {
 	$page = 1;
 }
+
+//１以下のページを防ぐ
 $page = max($page,1);
+
+//投稿総件数取得
 $cnt = getPageCount();
+
+//5件ごと表示するとして、最大何ページか変数に代入
 $maxPage = ceil($cnt['cnt'] / 5);
+
 $page = min($page, $maxPage);
+
 $start = ($page -1) * 5;
 $posts = getPostAll($start);
 $check = getFavoriteAll($user_id);
@@ -19,9 +29,6 @@ $check = getFavoriteAll($user_id);
 <div class="container">
 	<div class="row">
 		<div class="col-8 offset-2">
-
-		<div class="wrapper"></div>
-
 			<h1>投稿一覧</h1>
 		<?php foreach ($posts as $post): ?>
 		<div class="card mb-5 pb-3">
@@ -47,9 +54,6 @@ $check = getFavoriteAll($user_id);
 			</div>
 		</div>
 <?php endforeach; ?>
-
-
-
 			<ul>
 <?php if ($page > 1): ?>
 				<li><a href="index.php?page=<?php echo ($page-1); ?>">
