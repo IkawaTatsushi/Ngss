@@ -67,7 +67,7 @@ if (!empty($_POST)) {
 					<div class="divider-form divider-form1"></div>
 
 					<div class="form-group">
-					
+					<!-- ログインできていなかったら -->
 					<?php if ($error['pass'] === 'failed'): ?>
 							<small id="passwordHelpBlock" class="form-text text-muted">正しいメールアドレスとパスワードをご記入ください</small>
 						<?php endif; ?>
