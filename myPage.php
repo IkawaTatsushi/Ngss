@@ -1,12 +1,24 @@
 <?php
+//共通関数読み込み
 require('function.php');
+
+//自ユーザIDと閲覧中ユーザーIDを変数に代入
 $user_id = $_SESSION['id'];
 $re_id = $_REQUEST['myPage_id'];
+
+//閲覧中ユーザーをフォローしているか判別
 $follow_check = getFollow($user_id, $re_id);
+
+//自分がフォローしているユーザIDを$checkに全て代入
 $check = getFavoriteAll($user_id);
 
+//閲覧中ユーザーのIDを受け取っていたら
 if(!empty($re_id)){
+
+  //ユーザー情報取得
 	$reUser = getUser($re_id);
+
+  //ユーザーの全投稿情報取得
   $contents = getUserContents($re_id);
 }
 ?>

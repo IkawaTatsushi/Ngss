@@ -1,4 +1,5 @@
 <?php
+//共通関数読み込み
 require('function.php');
 $user_id = $_SESSION['id'];
 $url = 'update.php?update_id='.$user_id;

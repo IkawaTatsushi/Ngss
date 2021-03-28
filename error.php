@@ -1,4 +1,5 @@
 <?php
+//共通関数読み込み
 require('function.php');
 ?>
 <?php require('header.php'); ?>
