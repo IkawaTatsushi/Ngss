@@ -1,10 +1,18 @@
 <?php
 //共通関数読み込み
 require('function.php');
+
+//自ユーザーIDと他ユーザーIDを変数に代入
 $user_id = $_SESSION['id'];
 $re_id = $_REQUEST['id'];
+
+//投稿情報取得
 $post = getMessage($re_id);
+
+//この投稿にたいする返信メッセージ一覧取得
 $res = getReMessage($re_id);
+
+//自分がフォローしているかチェック
 $check = getFavoriteAll($user_id);
 ?>
 

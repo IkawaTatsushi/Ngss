@@ -2,11 +2,20 @@
 //共通関数読み込み
 require('function.php');
 
+//なにかが検索されていたら
 if(!empty($_POST)){
+
+	//検査ワードを変数に代入
     $key = '%'.$_POST['search'].'%';
+
+	//変数に自IDを代入
     $user_id = $_SESSION['id'];
+
+	//キワードから検索
     $searches = getSearch($key);
-    $check = getFavoriteAll($user_id);
+
+	//自分がフォローしているかチェック
+	$check = getFavoriteAll($user_id);
 }
 ?>
 <?php require('header.php'); ?>

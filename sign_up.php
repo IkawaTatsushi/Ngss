@@ -3,6 +3,7 @@
 require('function.php');
 
 if(!empty($_POST)) {
+
 	//メールチェック
 	validEmailDup($_POST['email']);
 	validEmailType($_POST['email']);
@@ -12,17 +13,32 @@ if(!empty($_POST)) {
 	validRequired($_POST['email'], 'email');
 	validRequired($_POST['password'], 'password');
 	
+		//ファイル名を受け取っていたら
 	if 	(!empty($_FILES['image']['name'])) {
 		$fileName = $_FILES['image']['name'];
+
+		//ファイルタイプチェック
 		imagetype($fileName);
 	}
+
 	if(empty($error)) {
+		//セッション変数に受け取った情報を代入
 		$_SESSION['join'] = $_POST;
+
+		//画像を受け取っていたら
 		if(!empty($_FILES['image']['name'])){
+
+			//画像の名前を変数に代入
 			$image = date('YmdHis') . $_FILES['image']['name'];
+
+					//画像を保存
 					move_uploaded_file($_FILES['image']['tmp_name'],
 					'user_img/' . $image);
+
+			//セッション変数に画像の名前を代入
 			$_SESSION['join']['image'] = $image;
+
+		//画像を受け取っていない場合デフォルト画像に設定
 		}else{
 			$_SESSION['join']['image'] = 'DefaultIcon.jpeg';
 		}
@@ -30,8 +46,13 @@ if(!empty($_POST)) {
 		exit();
 	}
 }
+
+//チェックページから戻るボタンが押された場合
 if ($_REQUEST['action'] =='rewrite' && isset($_SESSION['join'])) {
+	//セッション変数を$_POSTに戻す
 	$_POST = $_SESSION['join'];
+
+	//画像がデフォルト画像以外に設定されていたら、フォルダから画像を削除
 	if($_SESSION['join']['image'] !== 'DefaultIcon.jpeg'){
 	unlink('user_img/'.$_SESSION['join']['image']);
 	}

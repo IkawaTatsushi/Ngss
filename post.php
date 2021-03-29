@@ -1,30 +1,49 @@
 <?php
 //共通関数読み込み
 require('function.php');
+
+//ログインしていたら
 if(!empty($_SESSION['id'])){
 	$user_id = $_SESSION['id'];
 	$re_id = $_REQUEST['id'];
+
+	//投稿の情報を受け取っていたら
 	if(!empty($_POST)){
+
+		//ファイル名が存在したら
 		if($_FILES['image']['name'] !== ""){
+
+			//年月日とファイル名をつなげ、変数に代入
 			$image = date('YmdHis') . $_FILES['image']['name'];
+
+					//画像保存
 					move_uploaded_file($_FILES['image']['tmp_name'],
 					'picture/'. $image);
 		}
+
+		//メッセージを変数に代入
 		$message = $_POST['message'];
+
+		//未入力チェック
 		validRequired($message, 'message');
 		if(empty($error)){
+
+			//postsテーブルに書き込み
 			$stmt = createPost($message,$image,$user_id,$re_id);
+
+			//成功したらindex.phpに遷移,失敗したらerror.phpに遷移
 			if($stmt){
 				header('Location: index.php');
 				exit();
 			}else{
 				header('Location: error.php');
+				exit();
 			}
 		}
 	}
 }else{
-	echo 'ログインしてください';
-    echo '<a href="login.php">ログイン</a>';
+	header('Location: error.php');
+	exit();
 }
 ?>
 <?php require('header.php'); ?>
