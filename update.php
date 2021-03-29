@@ -1,9 +1,11 @@
 <?php
 //共通関数読み込み
 require('function.php');
+
+//自IDを変数に代入
 $user_id = $_SESSION['id'];
-$url = 'update.php?update_id='.$user_id;
 $pageId = $_REQUEST['update_id'];
+
 if($user_id == $pageId){
 	$user = getUser($user_id);
 	if(!empty($_POST) && !empty($_FILES['image']['name'])){
