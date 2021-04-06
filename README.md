@@ -1,8 +1,8 @@
 ▼言語  
 HTML,CSS,PHP,JavaScript
 
-▼DB
-MySQL
+▼DB  
+MySQL  
 
 ▼フレームワーク  
 Bootstrap,Jquery  
@@ -18,7 +18,7 @@ http://syokkun5555.php.xdomain.jp/ngss/login.php
 1か月程度。時間にすると40時間程です。  
 
 ▼制作理由  
-基本的なPHPの書き方、プログラムの動き方を把握するために制作しました。
+基本的なPHPの書き方、プログラムの動き方を把握するために制作しました。  
 
 ▼機能  
 ユーザー登録、ログイン、ログアウト、メッセージ投稿、返信、ページネーション、  
