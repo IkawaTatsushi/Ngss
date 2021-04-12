@@ -40,7 +40,7 @@ function validEmailDup($email){
             $error['email'] = MSG02;
         }
     } catch (Exception $e) {
-        $err_msg['common'] = MSG03;
+        $error['common'] = MSG03;
         echo 'DB接続エラー: ' . $e->getMessage();  
     }
 }
