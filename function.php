@@ -250,11 +250,12 @@ function getPost($id){
     }
 }
 //メッセージ投稿
-function createPost($message,$image,$user_id,$re_message_id){
+function createPost($message,$image,$user_id,$re_message_id,$re_message_user_id){
     try {
         $dbh = dbConnect();
-        $sql = 'INSERT INTO posts (message,picture,user_id,re_message_id) VALUES (:message,:picture,:user_id,:re_message_id)';
-        $data = array(':message' => $message,':picture' => $image,':user_id' => $user_id,'re_message_id' => $re_message_id);
+        $sql = 'INSERT INTO posts (message,picture,user_id,re_message_id,re_message_user_id) VALUES (:message,:picture,:user_id,:re_message_id,:re_message_user_id)';
+        $data = array(':message' => $message,':picture' => $image,':user_id' => $user_id,':re_message_id' => $re_message_id,':re_message_user_id' => $re_message_user_id);
+
         $stmt = queryPost($dbh, $sql, $data);
         if($stmt){
             return $stmt;
@@ -395,6 +396,37 @@ function update($name,$user_id){
         $data = array($name,$user_id);
         $stmt = queryPost($dbh, $sql, $data);
             return $stmt;
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//いいねしたコメント一覧を取得
+function getFavoriteComment($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.name, u.user_img, p.*, COUNT(f.user_id) AS good FROM users u 
+        RIGHT JOIN posts p ON u.id=p.user_id LEFT JOIN favorite f ON p.id = f.post_id 
+        WHERE f.user_id = ? GROUP BY p.id ORDER BY p.created DESC';
+        $data = array($re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt;
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//返信ツイート一覧を取得
+function getAllReMessage($re_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT u.id, u.name, u.user_img, p.*, COUNT(f.user_id) AS good FROM users u RIGHT JOIN posts p ON u.id=p.user_id LEFT JOIN favorite f 
+        ON p.id = f.post_id WHERE p.re_message_user_id = ? GROUP BY p.id ORDER BY p.created DESC';
+        $data = array($re_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        return $stmt;
+
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     }
