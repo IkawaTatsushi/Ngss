@@ -84,7 +84,7 @@ if(!empty($re_id)){
                                     <?php in_array($content['id'], $check) ? print'<a href="favorite_delete.php?id='.$content['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>'
                                     :print'<a href="favorite.php?id='.$content['id'].'" class="far fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>';?>
                                         <a href="post.php?id=<?php echo $content['id']; ?>" class="btn btn-dark mt-3 ml-3 mb-3 mr-3">返信</a>
-                                    <?php if($reUser['id'] == $user_id): ?>
+                                    <?php if($content['user_id'] == $user_id): ?>
                                         <a href="delete.php?id=<?php echo $content['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3">削除</a>
                                     <?php endif;?>
                                 </div>
@@ -114,7 +114,7 @@ if(!empty($re_id)){
                                     <?php in_array($ReMessage['id'], $check) ? print'<a href="favorite_delete.php?id='.$ReMessage['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$ReMessage['good'].'</span>'
                                     :print'<a href="favorite.php?id='.$ReMessage['id'].'" class="far fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$ReMessage['good'].'</span>';?>
                                         <a href="post.php?id=<?php echo $ReMessage['id']; ?>" class="btn btn-dark mt-3 ml-3 mb-3 mr-3">返信</a>
-                                    <?php if($reUser['id'] == $user_id): ?>
+                                    <?php if($ReMessage['user_id'] == $user_id): ?>
                                         <a href="delete.php?id=<?php echo $ReMessage['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3">削除</a>
                                     <?php endif;?>
                                 </div>
@@ -144,7 +144,7 @@ if(!empty($re_id)){
                                     <?php in_array($good['id'], $check) ? print'<a href="favorite_delete.php?id='.$good['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$good['good'].'</span>'
                                     :print'<a href="favorite.php?id='.$good['id'].'" class="far fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$good['good'].'</span>';?>
                                         <a href="post.php?id=<?php echo $good['id']; ?>" class="btn btn-dark mt-3 ml-3 mb-3 mr-3">返信</a>
-                                    <?php if($reUser['id'] == $user_id): ?>
+                                    <?php if($good['user_id'] == $user_id): ?>
                                         <a href="delete.php?id=<?php echo $good['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3">削除</a>
                                     <?php endif;?>
                                 </div>
