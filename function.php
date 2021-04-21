@@ -16,6 +16,9 @@ define('MSG02', 'このメールアドレスは既に登録されています');
 define('MSG03', '画像はjpg,ping,gif,jpegの形式でご指定ください');
 define('MSG04', '入力必須です');
 define('MSG05', 'メッセージの投稿に失敗しました');
+define('MSG06', '半角英数字で入力をしてください');
+define('MSG07', 'パスワードは８文字以上の半角英数字で入力をしてください');
+
 
 $error = array();
 
@@ -60,6 +63,22 @@ function validRequired($str, $key){
         $error[$key] = MSG04;
     }
 }
+
+//半角英数字チェック
+function halfAlphanumericCheck($key) {
+    if (preg_match("/^[a-zA-Z0-9]+$/", $key) == false) {
+        global $error;
+        $error['Alphanumeric'] = MSG06;
+    }
+}
+
+//パスワード最小文字数チェック
+function stringMinSizeCheck($key,$min_size = 8){
+    if (mb_strlen($key) < $min_size) {
+        global $error;
+        $error['MinSizeCheck'] = MSG07;
+    }
+} 
 
 //エラーメッセージ取得
 function getErrMsg($key){
