@@ -55,7 +55,8 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION['join'])) {
             <div class="col-sm-10">
                 <input type="name" name="name" maxlength="255" value="<?php echo
 			(h($_POST['name'])); ?>" class="form-control" id="inputName">
-			<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('name'); ?></small>
+			<small id="passwordHelpBlock" class="error">
+			<?php echo getErrMsg('name'); ?></small>
         	</div>
             </div>
 		
@@ -77,7 +78,12 @@ if ($_REQUEST['action'] =='rewrite' && isset($_SESSION['join'])) {
             <label for="inputPassword" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-10">
                 <input type="password" class="form-control" id="inputPassword" name="password" maxlength="20">
-				<small id="passwordHelpBlock" class="error"><?php echo getErrMsg('password'); ?></small>
+				<small id="passwordHelpBlock" class="error">
+					<?php echo getErrMsg('password');
+						  empty($error['password']) ? print getErrMsg('Alphanumeric') : $error;
+						  empty($error['Alphanumeric']) ? print getErrMsg('MinSizeCheck') : $error;
+					?>
+				</small>
             </div>
         </div>
         <!--/パスワード-->

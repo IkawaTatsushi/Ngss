@@ -36,12 +36,10 @@ if (!empty($_POST)) {
 <div class="wrapper">
 <div class="container">
     <div class="row">
-		<div class="col-lg-5 offset-lg-3">
+		<div class="col-lg-6 offset-lg-3">
 			<div class="box box1">
 
 				<form role="form" action="" method="post">
-					<div class="divider-form divider-form1"></div>
-
 					<div class="form-group">
 					<?php if ($error['pass'] === 'failed'): ?>
 							<small id="passwordHelpBlock" class="form-text text-muted">正しいメールアドレスとパスワードをご記入ください</small>
