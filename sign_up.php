@@ -10,6 +10,12 @@ if(!empty($_POST)) {
 	validRequired($_POST['name'], 'name');
 	validRequired($_POST['email'], 'email');
 	validRequired($_POST['password'], 'password');
+
+	//半角英数チェック
+	halfAlphanumericCheck($_POST['password']);
+
+	//文字数チェック
+	stringMinSizeCheck($_POST['password']);
 	
 	if 	(!empty($_FILES['image']['name'])) {
 		$fileName = $_FILES['image']['name'];
