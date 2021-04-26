@@ -10,8 +10,8 @@ if(isset($_SESSION['id'])) {
         }
         $stmt = deletePost($user_id);
         if($stmt){
-        header('Location: index.php');
-        exit();
+            header('Location:'.$_SERVER['HTTP_REFERER']);
+            exit();
         }else{
             echo '削除に失敗しました';
         }

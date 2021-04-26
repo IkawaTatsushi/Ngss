@@ -73,19 +73,19 @@ if(!empty($re_id)){
                                         <h5 class="card-title ml-3 mt-4 mr-auto">
                                             <a href="myPage.php?myPage_id=<?php echo h($content['user_id']);?>"><?php echo h($content['name']);?></a>
                                         </h5>
-                                        <small class="mr-5 mt-3"><?php echo h($content['created']);?></small>
+                                        <small class="mr-5 mt-3 date"><?php echo h($content['created']);?></small>
                                     </div>
                                     <p class="card-text my_card-text mt-3"><a href="show.php?id=<?php echo h($content['id']); ?>"><?php echo nl2br(h($content['message']));?></a></p>
                                 </div>
                                 <?php if(isset($content['picture'])): ?>
-                                    <img src="picture/<?php echo h($content['picture']);?>" class="img-fluid mt-4" alt="投稿画像">
+                                    <img src="picture/<?php echo h($content['picture']);?>" class="main_picture mt-4" alt="投稿画像">
                                 <?php endif; ?>
                                 <div class="d-flex justify-content-end">
                                     <?php in_array($content['id'], $check) ? print'<a href="favorite_delete.php?id='.$content['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>'
                                     :print'<a href="favorite.php?id='.$content['id'].'" class="far fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$content['good'].'</span>';?>
                                         <a href="post.php?id=<?php echo $content['id']; ?>" class="btn btn-dark mt-3 ml-3 mb-3 mr-3">返信</a>
                                     <?php if($content['user_id'] == $user_id): ?>
-                                        <a href="delete.php?id=<?php echo $content['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3">削除</a>
+                                        <a href="delete.php?id=<?php echo $content['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3 delete">削除</a>
                                     <?php endif;?>
                                 </div>
                             </div>
@@ -103,19 +103,21 @@ if(!empty($re_id)){
                                         <h5 class="card-title ml-3 mt-4 mr-auto">
                                             <a href="myPage.php?myPage_id=<?php echo h($ReMessage['user_id']);?>"><?php echo h($ReMessage['name']);?></a>
                                         </h5>
-                                        <small class="mr-5 mt-3"><?php echo h($ReMessage['created']);?></small>
+                                        <small class="mr-5 mt-3 date"><?php echo h($ReMessage['created']);?></small>
                                     </div>
-                                    <p class="card-text my_card-text mt-3"><a href="show.php?id=<?php echo h($ReMessage['id']); ?>"><?php echo nl2br(h($ReMessage['message']));?></a></p>
+                                    <p class="card-text my_card-text mt-3">
+                                    <a href="show.php?id=<?php echo h($ReMessage['id']); ?>/#<?php echo h($ReMessage['id']); ?>"><?php echo nl2br(h($ReMessage['message']));?></a>
+                                    </p>
                                 </div>
                                 <?php if(isset($ReMessage['picture'])): ?>
-                                    <img src="picture/<?php echo h($ReMessage['picture']);?>" class="img-fluid mt-4" alt="投稿画像">
+                                    <img src="picture/<?php echo h($ReMessage['picture']);?>" class="main_picture mt-4" alt="投稿画像">
                                 <?php endif; ?>
                                 <div class="d-flex justify-content-end">
                                     <?php in_array($ReMessage['id'], $check) ? print'<a href="favorite_delete.php?id='.$ReMessage['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$ReMessage['good'].'</span>'
                                     :print'<a href="favorite.php?id='.$ReMessage['id'].'" class="far fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$ReMessage['good'].'</span>';?>
                                         <a href="post.php?id=<?php echo $ReMessage['id']; ?>" class="btn btn-dark mt-3 ml-3 mb-3 mr-3">返信</a>
                                     <?php if($ReMessage['user_id'] == $user_id): ?>
-                                        <a href="delete.php?id=<?php echo $ReMessage['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3">削除</a>
+                                        <a href="delete.php?id=<?php echo $ReMessage['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3 delete">削除</a>
                                     <?php endif;?>
                                 </div>
                             </div>
@@ -133,19 +135,19 @@ if(!empty($re_id)){
                                         <h5 class="card-title ml-3 mt-4 mr-auto">
                                             <a href="myPage.php?myPage_id=<?php echo h($good['user_id']);?>"><?php echo h($good['name']);?></a>
                                         </h5>
-                                        <small class="mr-5 mt-3"><?php echo h($good['created']);?></small>
+                                        <small class="mr-5 mt-3 date"><?php echo h($good['created']);?></small>
                                     </div>
                                     <p class="card-text my_card-text mt-3"><a href="show.php?id=<?php echo h($good['id']); ?>"><?php echo nl2br(h($good['message']));?></a></p>
                                 </div>
                                 <?php if(isset($good['picture'])): ?>
-                                    <img src="picture/<?php echo h($good['picture']);?>" class="img-fluid mt-4" alt="投稿画像">
+                                    <img src="picture/<?php echo h($good['picture']);?>" class="main_picture mt-4" alt="投稿画像">
                                 <?php endif; ?>
                                 <div class="d-flex justify-content-end">
                                     <?php in_array($good['id'], $check) ? print'<a href="favorite_delete.php?id='.$good['id'].'" class="fas fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$good['good'].'</span>'
                                     :print'<a href="favorite.php?id='.$good['id'].'" class="far fa-heart fa-2x mt-3 mr-2 good"></a><span class="mt-3 good_count">'.$good['good'].'</span>';?>
                                         <a href="post.php?id=<?php echo $good['id']; ?>" class="btn btn-dark mt-3 ml-3 mb-3 mr-3">返信</a>
                                     <?php if($good['user_id'] == $user_id): ?>
-                                        <a href="delete.php?id=<?php echo $good['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3">削除</a>
+                                        <a href="delete.php?id=<?php echo $good['id']; ?>" class="btn btn-dark mt-3 mb-3 mr-3 delete">削除</a>
                                     <?php endif;?>
                                 </div>
                             </div>

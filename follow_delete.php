@@ -8,7 +8,7 @@ if(isset($_REQUEST['id']) && isset($_SESSION['id'])){
     if(in_array($_REQUEST['id'], $follow_check)){
         $stmt = followDelete($user_id,$re_id);
         header('Location:'.$_SERVER['HTTP_REFERER']);
-    exit();
+        exit();
     }else{
         header('Location: error.php');
         exit();

@@ -323,8 +323,12 @@ function getMessage($re_id){
         ON u.id=p.user_id LEFT JOIN favorite f ON p.id = f.post_id WHERE p.id = ? GROUP BY p.id ORDER BY p.created DESC';
         $data = array($re_id);
         $stmt = queryPost($dbh, $sql, $data);
-        return $stmt->fetch();
-            
+
+        if($stmt){
+            return $stmt->fetch();
+        }else{
+            return false;
+        }
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     }
@@ -408,6 +412,7 @@ function updateAll($name,$image,$user_id){
         echo 'DB接続エラー: ' . $e->getMessage();
     }
 }
+
 function update($name,$user_id){
     try {
         $dbh = dbConnect();
