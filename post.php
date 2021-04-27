@@ -1,15 +1,16 @@
 <?php
 require('function.php');
+
 if(!empty($_SESSION['id'])){
 	$user_id = $_SESSION['id'];
 
 	if(!empty($_REQUEST)){
 		$re_id = $_REQUEST['id'];
-		$post = getPost($re_id);
+		$post = getMessage($re_id);
 		$re_message_user_id = $post['user_id'];
 	}
 	
-	if(!empty($_POST)){
+	if(!empty($_POST['message'])){
 		if($_FILES['image']['name'] !== ""){
 			$image = date('YmdHis') . $_FILES['image']['name'];
 					move_uploaded_file($_FILES['image']['tmp_name'],
@@ -24,12 +25,13 @@ if(!empty($_SESSION['id'])){
 				exit();
 			}else{
 				header('Location: error.php');
+				exit();
 			}
 		}
 	}
 }else{
-	echo 'ログインしてください';
-    echo '<a href="login.php">ログイン</a>';
+	header('Location: login.php');
+	exit();
 }
 ?>
 
@@ -42,7 +44,11 @@ if(!empty($_SESSION['id'])){
 <small id="passwordHelpBlock" class="error"><?php echo getErrMsg('message'); ?></small>
 <form action="" method="post" enctype="multipart/form-data">
     <label for="message">メッセージを投稿する</label>
-    <textarea id="message" name="message" rows="8" cols="40" class="form-control"></textarea>
+<textarea id="message" name="message" rows="8" cols="40" class="form-control">
+<?php if(!empty($post)): ?>
+@<?php echo $post['name'] ?>&#13;
+<?php endif; ?>
+</textarea>
 
 	<label for="formFileMultiple" class="form-label mt-3">画像選択</label>
   	<input class="form-control" type="file" name="image" size="35" value="test" id="image" multiple>
@@ -50,7 +56,7 @@ if(!empty($_SESSION['id'])){
 
 	<div class="row">
 		<div class="col-sm-12 mt-3">
-					<input type="submit" class="btn btn-primary btn-block" value="送信">
+			<input type="submit" class="btn btn-primary btn-block" value="送信">
 		</div>
 	</div>
 </form>

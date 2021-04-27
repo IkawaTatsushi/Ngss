@@ -42,7 +42,7 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
-      <input class="form-control mr-sm-2" type="search" placeholder="キーワード検索" aria-label="Search" name="search">
+      <input class="form-control mr-sm-2" type="search" placeholder="キーワード検索" aria-label="Search" name="search" required>
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
   </div>

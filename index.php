@@ -27,12 +27,12 @@ $check = getFavoriteAll($user_id);
 				<div class="card-body">
 					<div class="d-flex">
 						<img src="user_img/<?php echo h($post['user_img']); ?>" class="rounded-circle mt-4 ml-3" alt="プロフィール画像">
-						<h5 class="card-title mt-5 ml-3 mr-auto">
-							<a href="myPage.php?myPage_id=<?php echo $post['user_id'];?>" class="mr-5 mr-auto"><?php echo h($post['name']);?></a>
+						<h5 class="card-title mt-5 ml-3 mr-md-auto">
+							<a href="myPage.php?myPage_id=<?php echo $post['user_id'];?>" class="mr-5 name"><?php echo h($post['name']);?></a>
 						</h5>
 						<small class="text-muted mr-5 mt-5 date"><?php echo $post['created'];?></small>
 					</div>
-					<p class="card-text ml-5 mt-3"><a href="show.php?id=<?php echo $post['id']; ?>">
+					<p class="card-text ml-5 mt-3"><a href="show.php?id=<?php echo $post['id']; ?>#<?php echo $post['id']; ?>">
 					<?php echo nl2br(h($post['message']));?></a></p>
 				</div>
 				<?php if(isset($post['picture'])): ?>

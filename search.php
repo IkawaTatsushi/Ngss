@@ -1,13 +1,20 @@
 <?php
 require('function.php');
 
-if(!empty($_POST)){
+if(!empty($_POST['search'])){
     $key = '%'.$_POST['search'].'%';
 	$_SESSION['key'] = $key;
     $user_id = $_SESSION['id'];
     $searches = getSearch($key);
     $check = getFavoriteAll($user_id);
 }
+
+if(!empty($_SESSION['key'])){
+	$key = $_SESSION['key'];
+	$searches = getSearch($key);
+    $check = getFavoriteAll($user_id);
+}
+
 ?>
 <?php require('header.php'); ?>
 <div class="container">

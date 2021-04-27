@@ -1,5 +1,8 @@
 <?php
 session_start();
+header('Expires:-1');
+header('Cache-Control:');
+header('Pragma:');
 session_regenerate_id(true);
 
 //エスケープ処理
@@ -94,7 +97,7 @@ function dbConnect(){
     $user = 'root';
     $password = 'root';
     $options = array(PDO::ATTR_EMULATE_PREPARES => false,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
         $dbh = new PDO($dsn, $user, $password, $options);
         return $dbh;
 }

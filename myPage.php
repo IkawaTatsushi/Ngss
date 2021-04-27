@@ -75,7 +75,7 @@ if(!empty($re_id)){
                                         </h5>
                                         <small class="mr-5 mt-3 date"><?php echo h($content['created']);?></small>
                                     </div>
-                                    <p class="card-text my_card-text mt-3"><a href="show.php?id=<?php echo h($content['id']); ?>"><?php echo nl2br(h($content['message']));?></a></p>
+                                    <p class="card-text my_card-text mt-3"><a href="show.php?id=<?php echo h($content['id']); ?>/#<?php echo h($content['id']); ?>"><?php echo nl2br(h($content['message']));?></a></p>
                                 </div>
                                 <?php if(isset($content['picture'])): ?>
                                     <img src="picture/<?php echo h($content['picture']);?>" class="main_picture mt-4" alt="投稿画像">
@@ -137,7 +137,7 @@ if(!empty($re_id)){
                                         </h5>
                                         <small class="mr-5 mt-3 date"><?php echo h($good['created']);?></small>
                                     </div>
-                                    <p class="card-text my_card-text mt-3"><a href="show.php?id=<?php echo h($good['id']); ?>"><?php echo nl2br(h($good['message']));?></a></p>
+                                    <p class="card-text my_card-text mt-3"><a href="show.php?id=<?php echo h($good['id']); ?>/#<?php echo h($good['id']); ?>"><?php echo nl2br(h($good['message']));?></a></p>
                                 </div>
                                 <?php if(isset($good['picture'])): ?>
                                     <img src="picture/<?php echo h($good['picture']);?>" class="main_picture mt-4" alt="投稿画像">
