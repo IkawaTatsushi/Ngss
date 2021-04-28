@@ -1,11 +1,15 @@
 <?php
 require('function.php');
 
+//フォームから受け取っていたら
 if (!empty($_POST)) {
 	$email = $_POST['email'];
     $pass = $_POST['pass'];
+
+	//メールアドレスを記憶するにチェックが入っていたらtrueを代入
 	$save = (!empty($_POST['save'])) ? true : false;
 
+	//メールとパスワードが入力されていたら
 	if($email !=='' && $pass !=='') {
 		try{
 			$dbh = dbConnect();
@@ -14,9 +18,16 @@ if (!empty($_POST)) {
 			$stmt = queryPost($dbh, $sql, $data);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+			//メールアドレスが一致かつ、パスワードが一致していたら
 			if (!empty($result) && password_verify($pass, array_shift($result))){
+
+				//ログインした時間を代入
 				$_SESSION['time'] = time();
+
+				//セッション変数にユーザーIDを代入
 				$_SESSION['id'] = $result['id'];
+
+					//メールアドレスを記憶するにチェックが入っていたら、メールアドレスをクッキーに保存
 					if ($save){
 						setcookie('email', $_POST['email'], time()+60*60*24*365);
 					}
@@ -58,7 +69,7 @@ if (!empty($_POST)) {
 					<div class="divider-form divider-form1"></div>
 
 					<input type="checkbox" id="save" name="save" value="on">
-					<label class="label1" for="save">次回からは自動的にログインする</label>
+					<label class="label1" for="save">メールアドレスを記憶する</label>
 
 					<input type="submit" class="btn-block btn btn-lg btn-primary btn-primary1" value="ログイン">
 				</form>

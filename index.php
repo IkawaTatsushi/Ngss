@@ -2,15 +2,29 @@
 require('function.php');
 $user_id = $_SESSION['id'];
 $page = $_REQUEST['page'];
+
+//ページ指定がない場合は1ページ目を指定
 if ($page == '') {
 	$page = 1;
 }
+
+//ページが1以上のページを指定していたら、$pageを上書き
 $page = max($page,1);
+
+//ツイートの総件数を取得
 $cnt = getPageCount();
+
+//ツイートの総件数を5で割り小数点を切り捨てた値を代入
 $maxPage = ceil($cnt['cnt'] / 5);
+
 $page = min($page, $maxPage);
+
 $start = ($page -1) * 5;
+
+//ページ数を元に、ツイートを取得
 $posts = getPostAll($start);
+
+//自分がいいねしたツイートIDを全件取得
 $check = getFavoriteAll($user_id);
 
 ?>

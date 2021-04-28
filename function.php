@@ -404,6 +404,7 @@ function favoriteDelete($re_id,$user_id){
     }
 }
 
+//ユーザーネームと画像を変更
 function updateAll($name,$image,$user_id){
     try {
         $dbh = dbConnect();
@@ -416,6 +417,7 @@ function updateAll($name,$image,$user_id){
     }
 }
 
+//ユーザーネームを変更
 function update($name,$user_id){
     try {
         $dbh = dbConnect();

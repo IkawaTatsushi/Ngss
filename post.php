@@ -1,24 +1,41 @@
 <?php
 require('function.php');
 
+//ログインしていたら
 if(!empty($_SESSION['id'])){
 	$user_id = $_SESSION['id'];
 
+	//返信ボタンから遷移していたら
 	if(!empty($_REQUEST)){
 		$re_id = $_REQUEST['id'];
+
+		//返信元のツイート情報を取得
 		$post = getMessage($re_id);
+
+		//変数にツイート元のユーザーIDを代入
 		$re_message_user_id = $post['user_id'];
 	}
 	
+	//フォームに入力があったら
 	if(!empty($_POST['message'])){
+
+		//画像を選択していたら
 		if($_FILES['image']['name'] !== ""){
+
+			//ファイル名を作成し、保存
 			$image = date('YmdHis') . $_FILES['image']['name'];
 					move_uploaded_file($_FILES['image']['tmp_name'],
 					'picture/'. $image);
 		}
 		$message = $_POST['message'];
+		
+		//未入力チェック
 		validRequired($message, 'message');
+
+		//エラーがなければ
 		if(empty($error)){
+
+			//ツイート情報をデータベースに保存
 			$stmt = createPost($message,$image,$user_id,$re_id,$re_message_user_id);
 			if($stmt){
 				header('Location: index.php');

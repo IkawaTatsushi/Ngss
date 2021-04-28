@@ -2,13 +2,26 @@
 require('function.php');
 $user_id = $_SESSION['id'];
 $re_id = $_REQUEST['myPage_id'];
+
+//自分のフォローID一覧を取得
 $follow_check = getFollow($user_id, $re_id);
+
+//自分のいいねしたツイートID一覧を取得
 $check = getFavoriteAll($user_id);
 
+//閲覧しているユーザーIDがあれば
 if(!empty($re_id)){
+
+    //閲覧中ユーザーの登録情報取得
     $reUser = getUser($re_id);
+
+    //閲覧中ユーザーの投稿情報取得
     $contents = getUserContents($re_id);
+
+    //閲覧中ユーザーのいいねしたコメント一覧を取得
     $goods = getFavoriteComment($re_id);
+
+    ////閲覧中ユーザーの返信ツイート一覧
     $ReMessages = getAllReMessage($re_id);
 }
 ?>
@@ -18,6 +31,8 @@ if(!empty($re_id)){
     <div class="header_img">
     </div>
     <div class="row main_content">
+
+        <!--/左側-->
         <div class="col-md-4 left_content">
             <div class="text-center mt-5 mr-5">
                 <img src="user_img/<?php echo h($reUser['user_img']); ?>" class="rounded-circle myPage_img ml-5" alt="プロフィール画像">
@@ -52,10 +67,9 @@ if(!empty($re_id)){
 
         <div class="line"></div>
 
+        <!--/右側-->
         <div class="col-md-7 right_content">
-
             <div class="tabs mt-3 ml-md-5">
-
                 <input id="all" type="radio" name="tab_item" checked>
                 <label class="tab_item" for="all">ツイート</label>
                 <input id="programming" type="radio" name="tab_item">
@@ -63,6 +77,7 @@ if(!empty($re_id)){
                 <input id="design" type="radio" name="tab_item">
                 <label class="tab_item" for="design">いいね</label>
 
+                <!--/閲覧中ユーザーのツイート一覧-->
                 <div class="tab_content" id="all_content">
                     <div class="tab_content_description">
                         <?php foreach ($contents as $content): ?>
@@ -93,6 +108,8 @@ if(!empty($re_id)){
                     </div>
                 </div>
 
+
+                <!--/閲覧中ユーザーへの返信ツイート一覧-->
                 <div class="tab_content" id="programming_content">
                     <div class="tab_content_description">
                         <?php foreach ($ReMessages as $ReMessage): ?>
@@ -125,6 +142,8 @@ if(!empty($re_id)){
                     </div>
                 </div>
 
+
+                <!--/閲覧中ユーザーのいいねしたツイート一覧-->
                 <div class="tab_content" id="design_content">
                     <div class="tab_content_description">
                         <?php foreach ($goods as $good): ?>
@@ -154,10 +173,7 @@ if(!empty($re_id)){
                         <?php endforeach; ?>
                     </div>
                 </div>
-
             </div>
-
-            
         </div>
     </div>
 </div>
