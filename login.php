@@ -1,6 +1,12 @@
 <?php
 require('function.php');
 
+if($_POST['login'] === 'gest'){
+	$_SESSION['id'] = 7;
+	$_SESSION['time'] = time();
+	header('Location: index.php');
+	exit();
+}
 //フォームから受け取っていたら
 if (!empty($_POST)) {
 	$email = $_POST['email'];
@@ -47,7 +53,7 @@ if (!empty($_POST)) {
 <div class="wrapper">
 <div class="container">
     <div class="row">
-		<div class="col-lg-6 offset-lg-3">
+		<div class="col-lg-6 offset-lg-3">	
 			<div class="box box1">
 
 				<form role="form" action="" method="post">
@@ -56,14 +62,12 @@ if (!empty($_POST)) {
 							<small id="passwordHelpBlock" class="form-text text-muted">正しいメールアドレスとパスワードをご記入ください</small>
 						<?php endif; ?>
 						<label class="label1" for="exampleInputEmail1">メールアドレス</label>
-						<p>ゲスト:test5@gmail.com</p>
 						<input type="email" name="email" size="35" maxlength="255" class="form-control form-control1" id="exampleInputEmail1" placeholder="email">
 					</div>
 					<div class="divider-form divider-form1"></div>
 
 					<div class="form-group">
 						<label class="label1" for="exampleInputPassword1">パスワード</label>
-						<p>ゲスト:test1212</p>
 						<input type="password" name="pass" size="10" maxlength="20" class="form-control form-control1" id="exampleInputPassword1" placeholder="Password">
 					</div>
 					<div class="divider-form divider-form1"></div>
@@ -72,6 +76,10 @@ if (!empty($_POST)) {
 					<label class="label1" for="save">メールアドレスを記憶する</label>
 
 					<input type="submit" class="btn-block btn btn-lg btn-primary btn-primary1" value="ログイン">
+				</form>
+				<form action="" method="post">
+					<input type="hidden" name="login" value="gest">
+					<input type="submit" class="btn-block btn btn-lg btn-primary btn-primary1" value="ゲストでログイン">
 				</form>
 			</div>
 		</div>
