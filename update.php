@@ -24,17 +24,38 @@ if($user_id == $pageId){
 ?>
 
 <?php require('header.php'); ?>
+<div class="wrapper1">
 <div class="container">
-<div class="wrapper"></div>
-<form action="" method="post" enctype="multipart/form-data">
-ユーザーネーム: <input type="text" name="name" value="<?php echo h($user['name']); ?>">
-<img src="user_img/<?php echo h($user['user_img']); ?>" class="rounded-circle" alt="プロフィール画像"><br>
-画像を変更する
-<input type="file" name="image" class="form-control-file" id="image">
-<img id="preview" class="rounded-circle">
-<input type="submit" value="変更する">
-</form>
-<br>
-<a href="myPage.php?myPage_id=<?php echo $user_id; ?>">戻る</a>
+    <div class="row">
+		<div class="col-lg-6 offset-lg-3">
+			<div class="box box1">
+
+				<form role="form" action="" method="post">
+					<div class="form-group text-center">
+						<label class="label1" for="exampleInputEmail1">ユーザーネーム</label>
+						<input type="text" name="name" size="35" maxlength="255" class="form-control form-control1 text-center" value="<?php echo h($user['name']); ?>">
+					</div>
+					<div class="divider-form divider-form1"></div>
+
+					<div class="form-group text-center">
+						<label class="label1" for="exampleInputPassword1">プロフィール画像</label><br>
+						<img src="user_img/<?php echo h($user['user_img']); ?>" class="rounded-circle" alt="プロフィール画像">
+					</div>
+					<div class="divider-form divider-form1"></div>
+
+					<div class="form-group text-center">
+						<label class="label1" for="exampleInputPassword1">変更後プロフィール画像</label><br>
+						<input type="file" name="image" class="form-control-file" id="images">
+						<img id="previews" class="rounded-circle">
+					</div>
+					<div class="divider-form divider-form1"></div>
+
+					<input type="submit" class="btn-block btn btn-lg btn-primary btn-primary1" value="変更する">
+				</form>
+				<a href="myPage.php?myPage_id=<?php echo $user_id; ?>" class="btn-block btn btn-lg btn-primary btn-primary1">戻る</a>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 <?php require('footer.php'); ?>
