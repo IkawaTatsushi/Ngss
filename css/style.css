@@ -232,6 +232,10 @@ input[name="tab_item"] {
   opacity:0.7;
 }
 
+.my_btn{
+  width: 13rem;
+}
+
 @media screen and (max-width: 480px) {
 
   .wrapper{

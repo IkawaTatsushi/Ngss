@@ -53,14 +53,17 @@ if(!empty($re_id)){
                 <?php endif; ?>
             </div>
 
-            <div class="d-flex justify-content-around">
+            <div class="text-center">
                 <a href="follow_view.php?id=<?php echo $reUser['id']; ?>" class="btn btn-primary follow mt-4 ml-5">フォロー</a>
                 <a href="follower_view.php?id=<?php echo $reUser['id']; ?>" class="btn btn-primary follower mt-4 mr-5">フォロワー</a>
             </div>
 
             <?php if($reUser['id'] == $user_id): ?>
                 <div class="text-center mt-4">
-                    <a href="update.php?update_id=<?php echo $user_id; ?>">ユーザー情報を変更する</a>
+                    <a href="update.php?update_id=<?php echo $user_id; ?>" class="btn btn-primary my_btn">ユーザー情報を変更する</a>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="cancel_the_membership.php?id=<?php echo $user_id; ?>" class="btn btn-primary my_btn">退会する</a>
                 </div>
             <?php endif; ?>
         </div>

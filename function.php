@@ -21,6 +21,7 @@ define('MSG04', '入力必須です');
 define('MSG05', 'メッセージの投稿に失敗しました');
 define('MSG06', '半角英数字で入力をしてください');
 define('MSG07', 'パスワードは８文字以上の半角英数字で入力をしてください');
+define('MSG08', '正しいパスワードをご入力ください。');
 
 
 $error = array();
@@ -297,8 +298,7 @@ function deletePost($id){
         $sql = 'DELETE FROM posts WHERE id=:id';
         $data = array(':id' => $id);
         $stmt = queryPost($dbh, $sql, $data);
-        return $stmt;
-            
+        return $stmt;    
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     }
@@ -455,6 +455,80 @@ function getAllReMessage($re_id){
         $data = array($re_id);
         $stmt = queryPost($dbh, $sql, $data);
         return $stmt;
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//パスワード一致チェック
+function password_match($user_id,$pass){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT password FROM users WHERE id = ?';
+        $data = array($user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        if($stmt){
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($pass,$result['password'])){
+                return true;
+            }else{
+                global $error;
+                $error['pass'] = MSG08;
+                return false;
+            }
+        }
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//退会処理(登録情報)
+function cancel_the_membership_user($user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'DELETE FROM users WHERE id=:id';
+        $data = array(':id' => $user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//退会処理(ツイート情報)
+function cancel_the_membership_post($user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'DELETE FROM posts WHERE user_id=:id';
+        $data = array(':id' => $user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//退会処理(いいね情報)
+function cancel_the_membership_good($user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'DELETE FROM favorite WHERE user_id=:id';
+        $data = array(':id' => $user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//退会処理(フォロー情報)
+function cancel_the_membership_follow($user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'DELETE FROM follow WHERE user_id=:id OR follow=:id';
+        $data = array(':id' => $user_id);
+        $stmt = queryPost($dbh, $sql, $data);
 
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();

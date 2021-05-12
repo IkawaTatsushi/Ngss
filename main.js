@@ -15,4 +15,12 @@ $(function() {
 			return false;
 		}
 	});
+
+	//退会アラート
+	$('.cancel-the-membership').click(function(){
+		if(!confirm('本当に退会しますか？')){
+			
+			return false;
+		}
+	});
 });
