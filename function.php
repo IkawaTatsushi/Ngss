@@ -404,6 +404,22 @@ function favoriteDelete($re_id,$user_id){
     }
 }
 
+//ユーザー画像を変更する際に元画像を削除
+function user_img_delete($user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT user_img FROM users WHERE id=?';
+        $data = array($user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+        $result = $stmt->fetch();
+        if($result['user_img'] !== "DefaultIcon.jpeg"){
+            unlink('user_img/'.$result['user_img']);
+        }
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
 //ユーザーネームと画像を変更
 function updateAll($name,$image,$user_id){
     try {

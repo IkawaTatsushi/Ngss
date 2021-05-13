@@ -9,6 +9,7 @@ if($user_id == $pageId){
 		$image = date('YmdHis').$_FILES['image']['name'];
 				move_uploaded_file($_FILES['image']['tmp_name'],
 				'user_img/'.$image);
+		user_img_delete($user_id);
 		$update = updateAll($name,$image,$user_id);
 		header('Location: myPage.php?myPage_id='.$user_id);
 		exit();
