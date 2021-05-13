@@ -469,7 +469,7 @@ function password_match($user_id,$pass){
         $data = array($user_id);
         $stmt = queryPost($dbh, $sql, $data);
         if($stmt){
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
             if(password_verify($pass,$result['password'])){
                 return true;
             }else{
@@ -529,6 +529,24 @@ function cancel_the_membership_follow($user_id){
         $sql = 'DELETE FROM follow WHERE user_id=:id OR follow=:id';
         $data = array(':id' => $user_id);
         $stmt = queryPost($dbh, $sql, $data);
+
+    } catch(PDOException $e) {
+        echo 'DB接続エラー: ' . $e->getMessage();
+    }
+}
+
+//退会処理(画像削除)
+function cancel_the_membership_picture($user_id){
+    try {
+        $dbh = dbConnect();
+        $sql = 'SELECT picture FROM posts WHERE user_id = :id';
+        $data = array(':id' => $user_id);
+        $stmt = queryPost($dbh, $sql, $data);
+
+        while($result = $stmt->fetch()){
+            $pictures[] = $result['picture'];
+        }
+        return $pictures;
 
     } catch(PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();

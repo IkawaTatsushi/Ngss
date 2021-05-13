@@ -17,11 +17,17 @@ if(isset($_SESSION['id'])) {
 		//一致していたら
 		if($match){
 			//登録情報削除
+			$pictures = cancel_the_membership_picture($user_id);
+			if(!empty($pictures)){
+				foreach($pictures as $picture){
+					unlink('picture/'.$picture);
+				}
+			}
 			cancel_the_membership_user($user_id);
 			cancel_the_membership_post($user_id);
 			cancel_the_membership_good($user_id);
 			cancel_the_membership_follow($user_id);
-
+			
 			//ログアウト処理
 			$_SESSION = array();
 			if (ini_set('session.use_cookies ')) {
